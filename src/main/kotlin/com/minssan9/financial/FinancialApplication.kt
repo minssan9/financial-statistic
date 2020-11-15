@@ -1,6 +1,7 @@
 package com.minssan9.financial
 
 import com.minssan9.financial.krbank.Service.ApiService
+import jdk.nashorn.internal.runtime.regexp.joni.Config.log
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationRunner
@@ -17,14 +18,14 @@ class FinancialApplication
         runApplication<FinancialApplication>(*args)
     }
 
-//    val logger = LoggerFactory.getLogger(FinancialApplication::class.java)
+    val logger = LoggerFactory.getLogger(FinancialApplication::class.java)
 
     @Autowired
     lateinit var apiService : ApiService
 
     @Throws(Exception::class)
     fun run(args: ApplicationRunner){
-        println(apiService.getKOSPI().toString())
+        logger.info( apiService.getKOSPI().toString())
     }
 
 
