@@ -1,44 +1,38 @@
 package com.minssan9.financial.krbank.Service
 
-import com.minssan9.financial.krbank.Domain.ApiRequest
-import com.minssan9.financial.krbank.Domain.ApiResult
-import com.minssan9.financial.krbank.Domain.ApiResults
-import org.springframework.beans.factory.annotation.Value
+import com.minssan9.financial.krbank.Dto.ApiRequest
+import com.minssan9.financial.krbank.Dto.ApiResults
+import lombok.extern.slf4j.Slf4j
+import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 
+@Slf4j
 @Service
-class ApiService() {
+class ApiService {
 
-    lateinit var restTemplate: RestTemplate
+    final lateinit var restTemplate: RestTemplate
 
-    fun getKOSPI(): ApiResults {
+    fun ApiService(builder: RestTemplateBuilder){
+        this.restTemplate = builder.build();
+    }
+
+    fun getData(apiRequest: ApiRequest): ApiResults {
+        return restTemplate.getForObject(apiRequest.getUrlString() , ApiResults::class.java)!!
+    }
+
+    fun getKOSPI(queryStartDate : String, queryEndDate : String ): ApiResults {
         var apiResults: ApiResults = getData(apiRequest =
         ApiRequest(1,
                 1000,
                 "064Y001",
                 "DD",
-                "202001",
-                "202011",
+                queryStartDate,
+                queryEndDate,
                 "0001000",
                 "",
                 ""))
         return apiResults
     }
 
-    fun getData(apiRequest: ApiRequest): ApiResults {
-
-        var url = apiRequest.url + "/" +
-                apiRequest.serviceName + "/" +
-                apiRequest.authKey + "/" +
-                apiRequest.requestType + "/" +
-                apiRequest.language + "/" +
-                apiRequest.reqStartCount + "/" + apiRequest.reqEndCount + "/" +
-                apiRequest.statisticCode + "/" +
-                apiRequest.period + "/" +
-                apiRequest.queryStartDate + "/" + apiRequest.queryEndDate + "/" +
-                apiRequest.option1 + "/"
-
-        return restTemplate.getForObject(url , ApiResults::class.java)!!
-    }
 }

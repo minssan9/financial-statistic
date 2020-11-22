@@ -1,4 +1,5 @@
-package com.minssan9.financial.krbank.Domain;
+package com.minssan9.financial.krbank.Dto;
+
 
 data class ApiResult(
     var unit_name : String,
