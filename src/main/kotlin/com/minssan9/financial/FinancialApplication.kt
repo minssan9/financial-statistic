@@ -19,6 +19,9 @@ import java.time.format.DateTimeFormatter
 //@CrossOrigin({"http://shop.voyagerss.com", "http://localhost", "http://www.voyagerss.com"})
 class FinancialApplication
 
+@Value("\${korean.bank.key}")
+val krBankKey : String = ""
+
 val dateFormatString = DateTimeFormatter.ofPattern("yyyyMMdd")
 val timeFormatString = DateTimeFormatter.ofPattern("HHmm")
 
@@ -26,10 +29,6 @@ val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 val timeFormat = DateTimeFormatter.ofPattern("HH:mm")
 
 val logger = LoggerFactory.getLogger(FinancialApplication::class.java)
-
-
-@Value("\${korean_bank_key}")
-public lateinit var krBankKey: String
 
 fun main(args: Array<String>) {
     runApplication<FinancialApplication>(*args)
