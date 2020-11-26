@@ -1,16 +1,11 @@
 package com.minssan9.financial.krbank.Dto
 
-import com.minssan9.financial.config.AppProperties
 import lombok.Data
-import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.context.properties.ConfigurationProperties
 
 @Data
-class ApiRequest(authKey : String,  reqStartCount: Long, reqEndCount: Long, statisticCode: String, period: String,
+class ApiRequest(krBankKey : String,  reqStartCount: Long, reqEndCount: Long, statisticCode: String, period: String,
                  queryStartDate: String , queryEndDate: String, option1 : String, option2 : String, option3 : String ) {
-
-    @set:Autowired lateinit var appProperties : AppProperties
-
-    val krBankKey : String = appProperties.krbankkey
 
     var url: String = "http://ecos.bok.or.kr/api";
     var serviceName: String = "StatisticSearch";

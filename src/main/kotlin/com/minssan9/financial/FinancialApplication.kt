@@ -3,8 +3,6 @@ package com.minssan9.financial
 import com.minssan9.financial.krbank.Service.ApiService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -15,12 +13,8 @@ import java.time.format.DateTimeFormatter
 
 
 @SpringBootApplication
-@PropertySource("classpath:account.properties")
-//@CrossOrigin({"http://shop.voyagerss.com", "http://localhost", "http://www.voyagerss.com"})
+@PropertySource("account.properties")
 class FinancialApplication
-
-@Value("\${korean.bank.key}")
-val krBankKey : String = ""
 
 val dateFormatString = DateTimeFormatter.ofPattern("yyyyMMdd")
 val timeFormatString = DateTimeFormatter.ofPattern("HHmm")
@@ -33,6 +27,7 @@ val logger = LoggerFactory.getLogger(FinancialApplication::class.java)
 fun main(args: Array<String>) {
     runApplication<FinancialApplication>(*args)
 }
+
 
 @Autowired
 lateinit var apiService: ApiService

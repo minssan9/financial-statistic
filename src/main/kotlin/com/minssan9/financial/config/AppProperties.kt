@@ -1,13 +1,8 @@
 package com.minssan9.financial.config
 
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.context.annotation.Configuration
+import org.springframework.stereotype.Component
 
-@Configuration
-@ConfigurationProperties("account")
+@Component
 class AppProperties {
-
-//    @Value("\${krbankkey}")
-    val krbankkey: String = "A3KS6JOGXDYWDBC2XQ3Y"
+    public val krbankkey : String = "A3KS6JOGXDYWDBC2XQ3Y"
 }

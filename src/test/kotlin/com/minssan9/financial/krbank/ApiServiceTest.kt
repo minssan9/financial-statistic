@@ -7,28 +7,24 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.test.web.client.getForEntity
-import org.springframework.context.annotation.PropertySource
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.time.LocalDateTime
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@PropertySource("classpath:account.properties")
-class ApiServiceTest(@Autowired val restTemplate: TestRestTemplate){
+class ApiServiceTest(){
 
-    @Value("\${account.krbankkey}")
-    val krBankKey : String = ""
+    @Autowired
+    lateinit var restTemplate: TestRestTemplate
 
     @InjectMocks
     private lateinit var apiService: ApiService
 
     @Test
     fun krBankApiTest() {
-
         //given
         val path = "/apiResult.json"
 
