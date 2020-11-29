@@ -17,21 +17,20 @@ import org.springframework.web.client.getForObject
 @Service
 @ConfigurationProperties("account")
 class ApiService {
-
-    @Autowired
-    private lateinit var appProperties: AppProperties
-
     @Autowired
     lateinit var restTemplate: RestTemplate
 
     @Autowired
     lateinit var krBankRepository: KrBankRepository
 
+
     fun saveData(apiRequest: ApiDto.ApiRequest){
-        getKOSPI("20200101", "20201120")?.
+        getDataFromAPI(apiRequest)?.
                 forEach{ i-> krBankRepository.save(i)}
     }
-    fun getData(apiRequest: ApiDto.ApiRequest): List<KrBankData>? {
+
+
+    fun getDataFromAPI(apiRequest: ApiDto.ApiRequest): List<KrBankData>? {
         val gson = Gson()
         val apiDto = ApiDto()
 
@@ -39,36 +38,11 @@ class ApiService {
         return gson?.fromJson(response.body, ApiDto.ApiResult::class.java).statisticSearch.row
     }
 
-    fun getKOSPIUrl(queryStartDate: String, queryEndDate: String): String {
-        return ApiDto.ApiRequest(
-                "",
-                "",
-                appProperties.krbankkey,
-                "",
-                "",
-                1,
-                1000,
-                "064Y001",
-                "DD",
-                queryStartDate,
-                queryEndDate,
-                "0001000",
-                "",
-                "").toString()
-    }
 
     fun getKOSPI(queryStartDate: String, queryEndDate: String): List<KrBankData>? {
-        return getData(apiRequest =
+        return getDataFromAPI(apiRequest =
         ApiDto.ApiRequest(
-                "",
-                "",
-                appProperties.krbankkey,
-                "",
-                "",
-                1,
-                1000,
                 "064Y001",
-                "DD",
                 queryStartDate,
                 queryEndDate,
                 "0001000",
