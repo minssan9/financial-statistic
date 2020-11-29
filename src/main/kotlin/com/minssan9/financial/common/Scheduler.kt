@@ -1,6 +1,6 @@
 package com.minssan9.financial.common
 
-import com.minssan9.financial.krbank.Service.ApiService
+import com.minssan9.financial.krbank.service.ApiService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component

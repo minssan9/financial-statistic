@@ -1,6 +1,6 @@
 package com.minssan9.financial
 
-import com.minssan9.financial.krbank.Service.ApiService
+import com.minssan9.financial.krbank.service.ApiService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationRunner
