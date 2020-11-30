@@ -27,8 +27,9 @@ class Scheduler{
                 nowDate,
                 "0001000",
                 "",
+                "",
                 "")
-        apiService.saveData(apiRequest)
+        apiService.getDataFromAPI(apiRequest)?.let { apiService.saveData(it) }
 
     }
 

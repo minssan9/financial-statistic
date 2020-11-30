@@ -40,7 +40,7 @@ fun  applicationRunner() : ApplicationRunner {
                     LocalDateTime.of(2020, 1, 1, 0, 0)
                             .format(dateFormatString)
             var endDate = LocalDateTime.now().format(dateFormatString)
-
+            apiService.getKOSPI("20200101", "20201129")?.let { it1 -> apiService.saveData(it1) }
 
             logger.info(apiService.getKOSPI(startDate, endDate).toString())
         }

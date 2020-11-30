@@ -1,20 +1,18 @@
 package com.minssan9.financial.krbank.dto
 
 import com.google.gson.annotations.SerializedName
-import com.minssan9.financial.config.AppProperties
 import com.minssan9.financial.krbank.domain.KrBankData
 import lombok.Builder
 import lombok.Data
 import lombok.RequiredArgsConstructor
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Required
 
 class ApiDto {
 
     @Builder
     @Data
     @RequiredArgsConstructor
-    data class ApiRequest (
+    data class ApiRequest(
+            val authKey: String,
             val statisticCode: String,
             val queryStartDate: String,
             val queryEndDate: String,
@@ -22,10 +20,7 @@ class ApiDto {
             val option2: String,
             val option3: String,
     ){
-        @Autowired
-        private lateinit var appProperties: AppProperties
 
-        val authKey: String = appProperties.krbankkey
         val url: String = "http://ecos.bok.or.kr/api"
         val serviceName: String = "StatisticSearch"
         val requestType: String = "json"
