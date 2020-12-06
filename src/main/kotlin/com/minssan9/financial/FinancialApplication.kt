@@ -1,6 +1,6 @@
 package com.minssan9.financial
 
-import com.minssan9.financial.krbank.service.ApiService
+import com.minssan9.financial.krbank.service.KrBankApiService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationRunner
@@ -30,7 +30,7 @@ fun main(args: Array<String>) {
 
 
 @Autowired
-lateinit var apiService: ApiService
+lateinit var krBankApiService: KrBankApiService
 
 @Bean
 fun  applicationRunner() : ApplicationRunner {
@@ -40,9 +40,9 @@ fun  applicationRunner() : ApplicationRunner {
                     LocalDateTime.of(2020, 1, 1, 0, 0)
                             .format(dateFormatString)
             var endDate = LocalDateTime.now().format(dateFormatString)
-            apiService.getKOSPI("20200101", "20201129")?.let { it1 -> apiService.saveData(it1) }
+            krBankApiService.getKOSPI("20200101", "20201129")?.let { it1 -> krBankApiService.saveData(it1) }
 
-            logger.info(apiService.getKOSPI(startDate, endDate).toString())
+            logger.info(krBankApiService.getKOSPI(startDate, endDate).toString())
         }
     }
 }

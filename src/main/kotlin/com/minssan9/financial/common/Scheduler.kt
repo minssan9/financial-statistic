@@ -1,7 +1,7 @@
 package com.minssan9.financial.common
 
 import com.minssan9.financial.krbank.dto.ApiDto
-import com.minssan9.financial.krbank.service.ApiService
+import com.minssan9.financial.krbank.service.KrBankApiService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter
 @Component
 class Scheduler{
     @Autowired
-    lateinit var apiService : ApiService
+    lateinit var krBankApiService : KrBankApiService
 
     @Scheduled(cron = "0 0 8 * * ?")
     fun scheduler (){
@@ -21,7 +21,7 @@ class Scheduler{
         val nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"))
 
         //Kospi index
-        var apiRequest = ApiDto.ApiRequest(
+        var krBankRequest = ApiDto.KrBankRequest(
                 "064Y001",
                 nowDate,
                 nowDate,
@@ -29,7 +29,7 @@ class Scheduler{
                 "",
                 "",
                 "")
-        apiService.getDataFromAPI(apiRequest)?.let { apiService.saveData(it) }
+        krBankApiService.getDataFromAPI(krBankRequest)?.let { krBankApiService.saveData(it) }
 
     }
 

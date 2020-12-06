@@ -23,6 +23,7 @@ data class KrBankData(
         @Column(name = "DATA_VALUE") @SerializedName("DATA_VALUE") val data_value : Double,
         @Column(name = "ITEM_NAME3") @SerializedName("ITEM_NAME3") val item_name3 : String,
         @Column(name = "TIME") @SerializedName("TIME") val time : String
+
 )
 
 //@Entity

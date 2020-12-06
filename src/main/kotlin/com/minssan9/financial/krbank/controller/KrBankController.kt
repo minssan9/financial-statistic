@@ -1,6 +1,6 @@
 package com.minssan9.financial.krbank.controller
 
-import com.minssan9.financial.krbank.service.ApiService
+import com.minssan9.financial.krbank.service.KrBankApiService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/krbankservice")
 class KrBankController {
     @Autowired
-    private lateinit var apiService: ApiService
+    private lateinit var krBankApiService: KrBankApiService
 
     @GetMapping("kospi")
     private fun getTemplates(): ResponseEntity<Any> {
-        var krBankData = apiService.getKOSPI("20200101", "20201129")?.let {
-            it1 -> apiService.saveData(it1)
+        var krBankData = krBankApiService.getKOSPI("20200101", "20201129")?.let {
+            it1 -> krBankApiService.saveData(it1)
         }
 
         return ResponseEntity

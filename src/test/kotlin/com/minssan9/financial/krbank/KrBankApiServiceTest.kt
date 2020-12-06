@@ -4,9 +4,8 @@ import com.google.gson.Gson
 import com.minssan9.financial.config.AppProperties
 import com.minssan9.financial.dateFormatString
 import com.minssan9.financial.krbank.domain.KrBankData
-import com.minssan9.financial.krbank.dto.ApiDto
 import com.minssan9.financial.krbank.repository.KrBankRepository
-import com.minssan9.financial.krbank.service.ApiService
+import com.minssan9.financial.krbank.service.KrBankApiService
 
 import org.junit.jupiter.api.Test
 import org.junit.runner.RunWith
@@ -27,10 +26,10 @@ import javax.transaction.Transactional
 @RunWith(MockitoJUnitRunner::class)
 @PropertySource("account")
 @Profile("test")
-class ApiServiceTest(@Autowired val restTemplate: TestRestTemplate, @Autowired val appProperties: AppProperties){
+class KrBankApiServiceTest(@Autowired val restTemplate: TestRestTemplate, @Autowired val appProperties: AppProperties){
 
     @Autowired
-    private lateinit var apiService: ApiService
+    private lateinit var krBankApiService: KrBankApiService
 
     @Autowired
     private lateinit var krBankRepository: KrBankRepository
@@ -50,7 +49,7 @@ class ApiServiceTest(@Autowired val restTemplate: TestRestTemplate, @Autowired v
 //                "http://ecos.bok.or.kr/api/StatisticSearch/" + appProperties.krbankkey
 //                        + "/json/kr/1/10/010Y002/MM/201101/201106/AAAA11/")
 
-        var krBankData: List<KrBankData>? =        apiService.getKOSPI(
+        var krBankData: List<KrBankData>? =        krBankApiService.getKOSPI(
                 "20200101",
                 "20201129")
         krBankData?.forEach {

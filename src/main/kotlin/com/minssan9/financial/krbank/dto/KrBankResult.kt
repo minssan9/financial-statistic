@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.minssan9.financial.krbank.domain.KrBankData
 import com.minssan9.financial.krbank.domain.KrBankSchema
 
-class KrBankDataResult{
+class KrBankResult{
 
     data class KrBankDataResult(
         @SerializedName("StatisticSearch")
@@ -15,6 +15,7 @@ class KrBankDataResult{
         @SerializedName("StatisticSearch")
         val dataResult: SchemaResult
     )
+
     data class DataResult(
         @SerializedName("list_total_count") val list_total_count: Int,
         @SerializedName("row") val row: List<KrBankData>

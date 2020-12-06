@@ -2,16 +2,21 @@ package com.minssan9.financial.krbank.dto
 
 import com.google.gson.annotations.SerializedName
 import com.minssan9.financial.krbank.domain.KrBankData
+import com.minssan9.financial.krbank.domain.KrBankSchema
 import lombok.Builder
 import lombok.Data
 import lombok.RequiredArgsConstructor
+import javax.persistence.Column
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 
 class ApiDto {
 
     @Builder
     @Data
     @RequiredArgsConstructor
-    data class ApiRequest(
+    data class KrBankRequest(
             val authKey: String,
             val statisticCode: String,
             val queryStartDate: String,
@@ -30,27 +35,39 @@ class ApiDto {
         val period: String = "DD"
     }
 
-    fun getUrlString(apiRequest: ApiRequest) : String {
-        return apiRequest.url + "/" +
-                apiRequest.serviceName + "/" +
-                apiRequest.authKey + "/" +
-                apiRequest.requestType + "/" +
-                apiRequest.language + "/" +
-                apiRequest.reqStartCount + "/" + apiRequest.reqEndCount + "/" +
-                apiRequest.statisticCode + "/" +
-                apiRequest.period + "/" +
-                apiRequest.queryStartDate + "/" + apiRequest.queryEndDate + "/" +
-                apiRequest.option1 + "/"
+//    http://ecos.bok.or.kr/api/StatisticTableList/sample/xml/kr/1/10/
+    fun getUrlString(krBankRequest: KrBankRequest) : String {
+        return krBankRequest.url + "/" +
+                krBankRequest.serviceName + "/" +
+                krBankRequest.authKey + "/" +
+                krBankRequest.requestType + "/" +
+                krBankRequest.language + "/" +
+                krBankRequest.reqStartCount + "/" + krBankRequest.reqEndCount + "/" +
+                krBankRequest.statisticCode + "/" +
+                krBankRequest.period + "/" +
+                krBankRequest.queryStartDate + "/" + krBankRequest.queryEndDate + "/" +
+                krBankRequest.option1 + "/"
     }
 
-        data class ApiResult(
-            @SerializedName("StatisticSearch")
-            val statisticSearch: StatisticSearch
+    data class KrBankSchemaResponse(
+        @SerializedName("StatisticSearch")
+        val krBankResult: KrBankSchemaResult
+    )
+    data class KrBankSchemaResult(
+        @SerializedName("list_total_count") val list_total_count: Int,
+        @SerializedName("row") val row: List<KrBankSchema>
     )
 
-    data class StatisticSearch(
+
+
+
+    data class KrBankDataResponse(
+        @SerializedName("StatisticSearch")
+        val krBankResult: KrBankDataResult
+    )
+
+    data class KrBankDataResult(
             @SerializedName("list_total_count") val list_total_count: Int,
             @SerializedName("row") val row: List<KrBankData>
     )
-
 }
