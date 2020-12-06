@@ -1,0 +1,87 @@
+{
+  "StatisticTableList": {
+    "list_total_count": 883,
+    "row": [
+      {
+        "SRCH_YN": "N",
+        "ORG_NAME": "",
+        "CYCLE": "",
+        "STAT_NAME": "1.통화 및 유동성지표",
+        "STAT_CODE": "000Y005",
+        "P_STAT_CODE": "*"
+      },
+      {
+        "SRCH_YN": "Y",
+        "ORG_NAME": "",
+        "CYCLE": "MM",
+        "STAT_NAME": "1.1.주요 통화금융지표",
+        "STAT_CODE": "010Y002",
+        "P_STAT_CODE": "000Y005"
+      },
+      {
+        "SRCH_YN": "N",
+        "ORG_NAME": "",
+        "CYCLE": "",
+        "STAT_NAME": "1.2.본원통화",
+        "STAT_CODE": "000Y074",
+        "P_STAT_CODE": "000Y005"
+      },
+      {
+        "SRCH_YN": "N",
+        "ORG_NAME": "",
+        "CYCLE": "",
+        "STAT_NAME": "1.2.1 본원통화 구성내역(말잔)",
+        "STAT_CODE": "000Y701",
+        "P_STAT_CODE": "000Y074"
+      },
+      {
+        "SRCH_YN": "Y",
+        "ORG_NAME": "",
+        "CYCLE": "MM",
+        "STAT_NAME": "1.2.1.1 본원통화 구성내역(말잔, 계절조정계열)",
+        "STAT_CODE": "054Y407",
+        "P_STAT_CODE": "000Y701"
+      },
+      {
+        "SRCH_YN": "Y",
+        "ORG_NAME": "",
+        "CYCLE": "MM",
+        "STAT_NAME": "1.2.1.2 본원통화 구성내역(말잔,원계열)",
+        "STAT_CODE": "054Y007",
+        "P_STAT_CODE": "000Y701"
+      },
+      {
+        "SRCH_YN": "N",
+        "ORG_NAME": "",
+        "CYCLE": "",
+        "STAT_NAME": "1.2.2 본원통화 구성내역(평잔)",
+        "STAT_CODE": "000Y702",
+        "P_STAT_CODE": "000Y074"
+      },
+      {
+        "SRCH_YN": "Y",
+        "ORG_NAME": "",
+        "CYCLE": "MM",
+        "STAT_NAME": "1.2.2.1 본원통화 구성내역(평잔, 계절조정계열)",
+        "STAT_CODE": "054Y408",
+        "P_STAT_CODE": "000Y702"
+      },
+      {
+        "SRCH_YN": "Y",
+        "ORG_NAME": "",
+        "CYCLE": "MM",
+        "STAT_NAME": "1.2.2.2 본원통화 구성내역(평잔,원계열)",
+        "STAT_CODE": "054Y008",
+        "P_STAT_CODE": "000Y702"
+      },
+      {
+        "SRCH_YN": "N",
+        "ORG_NAME": "",
+        "CYCLE": "",
+        "STAT_NAME": "1.3.M2(광의통화)",
+        "STAT_CODE": "000Y006",
+        "P_STAT_CODE": "000Y005"
+      }
+    ]
+  }
+}
