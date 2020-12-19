@@ -1,5 +1,6 @@
 package com.minssan9.financial
 
+import com.minssan9.financial.krbank.dto.KrBankDto
 import com.minssan9.financial.krbank.service.KrBankApiService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -33,21 +34,18 @@ fun main(args: Array<String>) {
 lateinit var krBankApiService: KrBankApiService
 
 @Bean
-fun  applicationRunner() : ApplicationRunner {
+fun applicationRunner(): ApplicationRunner {
     return ApplicationRunner() {
-        fun run(){
-            var startDate =
-                    LocalDateTime.of(2020, 1, 1, 0, 0)
-                            .format(dateFormatString)
-            var endDate = LocalDateTime.now().format(dateFormatString)
-            krBankApiService.getKOSPI("20200101", "20201129")?.let { it1 -> krBankApiService.saveData(it1) }
-
-            logger.info(krBankApiService.getKOSPI(startDate, endDate).toString())
+        fun run() {
+            krBankApiService.getSchemaFromAPI(
+                KrBankDto.KrBankRequest("", "", "", "",
+                    "", "", 1, 100)
+            )?.let {
+                    it1 -> krBankApiService.saveSchema(it1)
+            }
         }
     }
 }
-
-
 
 
 // @Value("${email.account}")
