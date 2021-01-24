@@ -1,6 +1,6 @@
 package com.minssan9.financial.common
 
-import com.minssan9.financial.krbank.dto.ApiDto
+import com.minssan9.financial.krbank.dto.KrBankDto
 import com.minssan9.financial.krbank.service.KrBankApiService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.scheduling.annotation.Scheduled
@@ -21,14 +21,14 @@ class Scheduler{
         val nowTime = now.format(DateTimeFormatter.ofPattern("HHmmss"))
 
         //Kospi index
-        var krBankRequest = ApiDto.KrBankRequest(
+        var krBankRequest = KrBankDto.KrBankRequest(
                 "064Y001",
-                nowDate,
-                nowDate,
                 "0001000",
                 "",
                 "",
-                "")
+                nowDate,
+                nowDate,
+    1, 1000)
         krBankApiService.getDataFromAPI(krBankRequest)?.let { krBankApiService.saveData(it) }
 
     }

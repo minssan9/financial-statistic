@@ -1,38 +1,40 @@
 package com.minssan9.financial.krbank.dto
 
 import com.google.gson.annotations.SerializedName
+import com.minssan9.financial.config.AppProperties
 import com.minssan9.financial.krbank.domain.KrBankData
 import com.minssan9.financial.krbank.domain.KrBankSchema
-import lombok.Builder
-import lombok.Data
-import lombok.RequiredArgsConstructor
+import lombok.*
+import org.springframework.beans.factory.annotation.Autowired
 import javax.persistence.Column
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-class ApiDto {
+class KrBankDto {
 
-    @Builder
+
     @Data
-    @RequiredArgsConstructor
+    @NoArgsConstructor
     data class KrBankRequest(
-            val authKey: String,
-            val statisticCode: String,
-            val queryStartDate: String,
-            val queryEndDate: String,
-            val option1: String,
-            val option2: String,
-            val option3: String,
+            var statisticCode: String,
+            var option1: String,
+            var option2: String,
+            var option3: String,
+            var queryStartDate: String,
+            var queryEndDate: String,
+            var reqStartCount: Long,
+            var reqEndCount: Long,
     ){
+        @Autowired
+        lateinit var appProperties: AppProperties
 
-        val url: String = "http://ecos.bok.or.kr/api"
-        val serviceName: String = "StatisticSearch"
-        val requestType: String = "json"
-        val language: String = "kr"
-        val reqStartCount: Long = 1
-        val reqEndCount: Long = 1000
-        val period: String = "DD"
+        var serviceName: String=""
+        var url: String = "http://ecos.bok.or.kr/api"
+        var authKey: String = appProperties.krbankkey
+        var requestType: String = "json"
+        var language: String = "kr"
+        var period: String = "DD"
     }
 
 //    http://ecos.bok.or.kr/api/StatisticTableList/sample/xml/kr/1/10/

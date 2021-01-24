@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.minssan9.financial.config.AppProperties
 import com.minssan9.financial.dateFormatString
 import com.minssan9.financial.krbank.domain.KrBankData
-import com.minssan9.financial.krbank.repository.KrBankRepository
+import com.minssan9.financial.krbank.repository.KrBankDataRepository
 import com.minssan9.financial.krbank.service.KrBankApiService
 
 import org.junit.jupiter.api.Test
@@ -32,7 +32,7 @@ class KrBankApiServiceTest(@Autowired val restTemplate: TestRestTemplate, @Autow
     private lateinit var krBankApiService: KrBankApiService
 
     @Autowired
-    private lateinit var krBankRepository: KrBankRepository
+    private lateinit var krBankDataRepository: KrBankDataRepository
 
     @Test
     @Transactional
@@ -56,7 +56,7 @@ class KrBankApiServiceTest(@Autowired val restTemplate: TestRestTemplate, @Autow
             i ->
             run {
                 println(i)
-                krBankRepository.save(i)
+                krBankDataRepository.save(i)
             }
         }
 
