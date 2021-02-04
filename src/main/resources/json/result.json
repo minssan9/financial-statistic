@@ -1,0 +1,160 @@
+{
+  "id": 1,
+  "statNm": "종묘 공영주차장",
+  "statId": "ME000001",
+  "chgerId": "01",
+  "chgerType": "03",
+  "addr": "서울특별시 종로구 종로 157, 지하주차장 4층 하층 T구역",
+  "lat": 37.571076,
+  "lng": 126.99588,
+  "useTime": "24시간 이용가능",
+  "busiId": "ME",
+  "busiNm": "환경부",
+  "busiCall": "1661-9408",
+  "stat": 2,
+  "statUpdDt": "20201220181331",
+  "powerType": "",
+  "note": "",
+  "zcode": 11,
+  "parkingFree": "0",
+  "chargers": [
+    {}
+  ]
+}
+,
+
+{
+  "id": 1,
+  "statNm": "종묘 공영주차장",
+  "statId": "ME000001",
+  "chgerId": "01",
+  "chgerType": "03",
+  "addr": "서울특별시 종로구 종로 157, 지하주차장 4층 하층 T구역",
+  "lat": 37.571076,
+  "lng": 126.99588,
+  "useTime": "24시간 이용가능",
+  "busiId": "ME",
+  "busiNm": "환경부",
+  "busiCall": "1661-9408",
+  "stat": 2,
+  "statUpdDt": "20201220181331",
+  "powerType": "",
+  "note": "",
+  "zcode": 11,
+  "parkingFree": "0",
+  "chargers": [
+    {
+      "id": 1,
+      "chargerType": "HMC",
+      "chargerOption": "AA",
+      "useStatus": "N",
+      "powerType": {
+        "id": 1,
+        "powertype": "common",
+        "volt": 220
+      }
+    },
+    {
+      "id": 2,
+      "chargerType": "type2",
+      "chargerOption": "AA",
+      "useStatus": "N",
+      "powerType": {
+        "id": 2,
+        "powertype": "powerttype1",
+        "volt": 110
+      }
+    }
+  ]
+}
+
+[
+  {
+    "id": 1,
+    "statNm": "종묘 공영주차장",
+    "statId": "ME000001",
+    "chgerId": "01",
+    "chgerType": "03",
+    "addr": "서울특별시 종로구 종로 157, 지하주차장 4층 하층 T구역",
+    "lat": 37.571076,
+    "lng": 126.99588,
+    "useTime": "24시간 이용가능",
+    "busiId": "ME",
+    "busiNm": "환경부",
+    "busiCall": "1661-9408",
+    "stat": 2,
+    "statUpdDt": "20201220181331",
+    "powerType": "",
+    "note": "",
+    "zcode": 11,
+    "parkingFree": "0",
+    "chargers": [
+      {
+        "id": 1,
+        "chargerType": "HMC",
+        "chargerOption": "AA",
+        "useStatus": "N",
+        "powerType": {
+          "id": 1,
+          "powertype": "common",
+          "volt": 220
+        }
+      },
+      {
+        "id": 2,
+        "chargerType": "type2",
+        "chargerOption": "AA",
+        "useStatus": "N",
+        "powerType": {
+          "id": 2,
+          "powertype": "powerttype1",
+          "volt": 110
+        }
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "statNm": "종묘 공영주차장",
+    "statId": "ME000001",
+    "chgerId": "01",
+    "chgerType": "03",
+    "addr": "서울특별시 종로구 종로 157, 지하주차장 4층 하층 T구역",
+    "lat": 37.571076,
+    "lng": 126.99588,
+    "useTime": "24시간 이용가능",
+    "busiId": "ME",
+    "busiNm": "환경부",
+    "busiCall": "1661-9408",
+    "stat": 2,
+    "statUpdDt": "20201220181331",
+    "powerType": "",
+    "note": "",
+    "zcode": 11,
+    "parkingFree": "0",
+    "chargers": [
+      {
+        "id": 1,
+        "chargerType": "HMC",
+        "chargerOption": "AA",
+        "useStatus": "N",
+        "powerType": {
+          "id": 1,
+          "powertype": "common",
+          "volt": 220
+        }
+      },
+      {
+        "id": 2,
+        "chargerType": "type2",
+        "chargerOption": "AA",
+        "useStatus": "N",
+        "powerType": {
+          "id": 2,
+          "powertype": "powerttype1",
+          "volt": 110
+        }
+      }
+    ]
+  }
+]
