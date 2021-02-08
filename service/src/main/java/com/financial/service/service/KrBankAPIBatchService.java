@@ -1,15 +1,14 @@
-package com.voyagerss.financial.service;
+package com.financial.servicea.service;
 
-import com.voyagerss.financial.domain.KrBankData;
-import com.voyagerss.financial.domain.KrBankSchema;
-import com.voyagerss.financial.dto.KrBankDataResponse;
-import com.voyagerss.financial.dto.KrBankRequest;
-import com.voyagerss.financial.repository.KrBankDataRepository;
-import com.voyagerss.financial.repository.KrBankSchemaRepository;
+import com.financial.service.domain.KrBankData;
+import com.financial.service.domain.KrBankSchema;
+import com.financial.service.dto.KrBankRequest;
+import com.financial.service.repository.KrBankDataRepository;
+import com.financial.service.repository.KrBankSchemaRepository;
+import com.financial.service.service.KrBankApiService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class KrBankAPIBatchService {

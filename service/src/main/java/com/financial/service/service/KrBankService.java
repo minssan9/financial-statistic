@@ -1,11 +1,10 @@
-package com.voyagerss.financial.service;
+package com.financial.service.service;
 
-import com.voyagerss.financial.domain.KrBankData;
-import com.voyagerss.financial.domain.KrBankSchema;
-import com.voyagerss.financial.dto.KrBankRequest;
-import org.springframework.stereotype.Service;
-
+import com.financial.service.domain.KrBankData;
+import com.financial.service.domain.KrBankSchema;
+import com.financial.service.dto.KrBankRequest;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 
 //@Slf4j

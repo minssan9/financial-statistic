@@ -1,24 +1,22 @@
-package com.voyagerss.financial.service;
+package com.financial.service.service;
 
+import com.financial.service.config.KrBankProperties;
+import com.financial.service.domain.KrBankData;
+import com.financial.service.domain.KrBankSchema;
+import com.financial.service.dto.KrBankDataResponse;
+import com.financial.service.dto.KrBankRequest;
+import com.financial.service.dto.KrBankSchemaResponse;
+import com.financial.service.repository.KrBankDataRepository;
+import com.financial.service.repository.KrBankSchemaRepository;
 import com.google.gson.Gson;
-import com.voyagerss.financial.config.KrBankProperties;
-import com.voyagerss.financial.domain.KrBankData;
-import com.voyagerss.financial.domain.KrBankSchema;
-import com.voyagerss.financial.dto.KrBankDataResponse;
-import com.voyagerss.financial.dto.KrBankRequest;
-import com.voyagerss.financial.dto.KrBankSchemaResponse;
-import com.voyagerss.financial.dto.StatisticSearch;
-import com.voyagerss.financial.repository.KrBankDataRepository;
-import com.voyagerss.financial.repository.KrBankSchemaRepository;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Slf4j
@@ -50,7 +48,7 @@ public class KrBankApiService {
         return krBankSchemas;
     }
 
-    List<KrBankData> getDataFromAPI(KrBankRequest krBankRequest) {
+    public List<KrBankData> getDataFromAPI(KrBankRequest krBankRequest) {
         krBankRequest.setServiceName("StatisticSearch");
 
         ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);

@@ -1,6 +1,6 @@
-package com.voyagerss.financial.repository;
+package com.financial.service.repository;
 
-import com.voyagerss.financial.domain.KrBankSchema;
+import com.financial.service.domain.KrBankSchema;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

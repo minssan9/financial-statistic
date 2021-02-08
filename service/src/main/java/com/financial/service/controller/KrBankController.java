@@ -1,24 +1,21 @@
-package com.voyagerss.financial.controller;
+package com.financial.service.controller;
 
-;
-import com.voyagerss.financial.domain.KrBankData;
-import com.voyagerss.financial.domain.KrBankSchema;
-import com.voyagerss.financial.dto.KrBankRequest;
-import com.voyagerss.financial.service.KrBankApiService;
+import com.financial.service.domain.KrBankData;
+import com.financial.service.dto.KrBankRequest;
+import com.financial.service.service.KrBankApiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.hibernate.annotations.Any;;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+;
+;
 
 @Tag(name = "ecos data source example", description = "This controller is for the test")
 @RestController("ecos")

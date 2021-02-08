@@ -1,9 +1,7 @@
-package com.voyagerss.financial.controller;
+package com.financial.service.controller;
 
-import com.voyagerss.financial.service.KrBankApiService;
+import com.financial.service.service.KrBankApiService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("krbankapi")
 class KrBankApiController {
     @Autowired
-    private  KrBankApiService krBankApiService;
- 
+    private KrBankApiService krBankApiService;
+
 //    @GetMapping("kospi")
 //    private ResponseEntity getTemplates() {
 //        return ResponseEntity.ok().body(krBankApiService.getKOSPI("20200101", "20201129", 1L, 1000L));

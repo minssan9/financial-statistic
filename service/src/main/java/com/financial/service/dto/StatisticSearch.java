@@ -1,12 +1,11 @@
-package com.voyagerss.financial.dto;
+package com.financial.service.dto;
 
+import com.financial.service.domain.KrBankData;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.voyagerss.financial.domain.KrBankData;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class StatisticSearch implements Serializable {

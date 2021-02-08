@@ -1,10 +1,9 @@
-package com.voyagerss.financial.dto;
+package com.financial.service.dto;
 
+import com.financial.service.domain.KrBankSchema;
 import com.google.gson.annotations.SerializedName;
-import com.voyagerss.financial.domain.KrBankSchema;
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class KrBankSchemaResponse {

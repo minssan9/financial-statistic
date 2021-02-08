@@ -1,10 +1,15 @@
-package com.voyagerss.financial.domain;
+package com.financial.service.domain;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import lombok.NoArgsConstructor;
-import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor

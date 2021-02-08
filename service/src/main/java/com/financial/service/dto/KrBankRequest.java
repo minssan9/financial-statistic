@@ -1,6 +1,6 @@
-package com.voyagerss.financial.dto;
+package com.financial.service.dto;
 
-import com.voyagerss.financial.domain.KrBankSchema;
+import com.financial.service.domain.KrBankSchema;
 import lombok.Data;
 
 @Data
