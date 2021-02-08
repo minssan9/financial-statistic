@@ -1,0 +1,26 @@
+plugins {
+	id 'org.springframework.boot'
+}
+
+group = 'com.voyagerss'
+version = '0.1.0'
+
+repositories {
+	mavenCentral()
+}
+
+
+bootJar {
+	manifest {
+		attributes 'Start-Class': 'com.service.ServerApplication'
+	}
+}
+dependencies {
+	compile project(':core')
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+test {
+	useJUnitPlatform()
+}

@@ -1,0 +1,37 @@
+application:
+    name: charger
+
+server:
+    port: 53000
+
+    #Mongo
+spring:
+    profiles:
+        active: local
+    #  include: core
+    datasource:
+        dbcp2:
+            initial-size: 7
+            max-total: 20
+            pool-prepared-statements: true
+    devtools:
+        livereload:
+            enabled: true
+springdoc:
+    version: '1.0.0'
+    api-docs:
+        groups:
+            enabled: true
+    default-consumes-media-type: application/json
+    default-produces-media-type: application/json
+    swagger-ui:
+        operations-sorter: alpha
+        tags-sorter: alpha
+        path: /swagger-ui.html
+        disable-swagger-default-url: true
+        display-query-params-without-oauth2: true
+    paths-to-match: /**
+
+#bitcoin
+url.bitcoin.price: https://api.coindesk.com/v1/bpi/currentprice/BTC.json
+account.config: account.properties

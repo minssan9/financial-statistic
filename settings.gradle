@@ -1,1 +1,3 @@
-rootProject.name = 'charger'
+rootProject.name = 'financial-statistic'
+include 'service'
+include 'core'
