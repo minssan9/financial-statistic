@@ -1,9 +1,9 @@
 server:
-    port: 54000
+    port: 44000
 
 # For local phase configurations
 application:
-    name: financial-statistics-service
+    name: financial-statistics
 
 
 spring:
@@ -20,7 +20,7 @@ spring:
             max-total: 20
             pool-prepared-statements: true
     jpa:
-        show-sql: false
+        show-sql: true
         generate-ddl: true
         hibernate:
             ddl-auto: none

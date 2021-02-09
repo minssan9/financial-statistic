@@ -1,3 +1,4 @@
 rootProject.name = 'financial-statistic'
 include 'service'
 include 'core'
+include 'batch'

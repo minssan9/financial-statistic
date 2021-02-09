@@ -17,8 +17,6 @@ bootJar {
 }
 dependencies {
 	compile project(':core')
-
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 test {

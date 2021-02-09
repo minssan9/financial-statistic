@@ -9,11 +9,6 @@ spring:
     profiles:
         active: local
     #  include: core
-    datasource:
-        dbcp2:
-            initial-size: 7
-            max-total: 20
-            pool-prepared-statements: true
     devtools:
         livereload:
             enabled: true
@@ -34,4 +29,3 @@ springdoc:
 
 #bitcoin
 url.bitcoin.price: https://api.coindesk.com/v1/bpi/currentprice/BTC.json
-account.config: account.properties
