@@ -1,6 +1,6 @@
-package com.scheduler.job;
+package com.batch.job;
 
-import com.scheduler.tasklet.SampleJobStep2Tasklet;
+import com.batch.tasklet.EcosJobStep2Tasklet;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.ExitStatus;
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @RequiredArgsConstructor
 @Configuration
-public class SampleJobConfiguration {
+public class EcosJobConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
@@ -58,12 +58,12 @@ public class SampleJobConfiguration {
                 }).build();
     }
 
-    private final SampleJobStep2Tasklet sampleJobStep2Tasklet;
+    private final EcosJobStep2Tasklet ecosJobStep2Tasklet;
 //    @Bean
 //    @JobScope
     public Step sampleStep2() {
         return stepBuilderFactory.get("sampleStep2")
-                .tasklet(sampleJobStep2Tasklet)
+                .tasklet(ecosJobStep2Tasklet)
                 .build();
     }
 

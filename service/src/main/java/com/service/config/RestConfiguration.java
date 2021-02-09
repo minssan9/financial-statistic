@@ -1,4 +1,4 @@
-package com.core.config;
+package com.service.config;
 
 import java.time.Duration;
 import java.util.ArrayList;

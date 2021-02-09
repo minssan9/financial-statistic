@@ -25,11 +25,10 @@ class KrBankController {
 
 
     @GetMapping("schema/list/{statname}/{startPos}/{endPos}")
-    private ResponseEntity getSchema(@PathVariable String statname, @PathVariable Long startPos, @PathVariable Long endPos ) {
-        KrBankRequest krBankRequest = new KrBankRequest("","","","","","",startPos, endPos);
+    private ResponseEntity getSchema( ) {
         return ResponseEntity
                 .ok()
-            .body(krBankApiService.getSchemaFromAPI(krBankRequest));
+            .body(krBankApiService.getSchemaFromAPI());
     }
 
     @Operation(summary = "Get Data by Date",
@@ -45,10 +44,10 @@ class KrBankController {
     )
     @GetMapping("data/{code}/{option1}/{startDate}/{endDate}")
     private ResponseEntity getData(@PathVariable String code, @PathVariable String option1,@PathVariable Long startPos, @PathVariable Long endPos ) {
-        KrBankRequest krBankRequest = new KrBankRequest("","","","","","",startPos, endPos);
+        KrBankRequest krBankRequest = new KrBankRequest("","","","","","" ,"DD",startPos, endPos);
         return ResponseEntity
             .ok()
-            .body(krBankApiService.getSchemaFromAPI(krBankRequest));
+            .body(krBankApiService.getDataFromAPI(krBankRequest));
     }
 //    @GetMapping("/{date}")
 //    private  getTemplateById(@PathVariable date: String): ResponseEntity<Any> {

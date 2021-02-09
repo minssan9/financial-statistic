@@ -1,4 +1,4 @@
-package com.scheduler.tasklet;
+package com.batch.tasklet;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.StepContribution;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @StepScope
-public class SampleJobStep2Tasklet implements Tasklet {
+public class EcosJobStep2Tasklet implements Tasklet {
 
     @Value("#{jobParameters[str]}")
     private String str;

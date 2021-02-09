@@ -1,9 +1,9 @@
 server:
-    port: 44000
+    port: 54002
 
 # For local phase configurations
 application:
-    name: financial-statistics
+    name: financial-statistics-batch
 
 
 spring:
@@ -20,7 +20,7 @@ spring:
             max-total: 20
             pool-prepared-statements: true
     jpa:
-        show-sql: true
+        show-sql: false
         generate-ddl: true
         hibernate:
             ddl-auto: none
@@ -30,20 +30,10 @@ spring:
                 format_sql: true
                 dialect: org.hibernate.dialect.MySQLDialect
 #        database-platform: org.hibernate.dialect.MySQL8Dialect
-
-
-#OAuth2
-encodeKey: secret
-
-#Email account info
-email.account: en9door
-email.password: dbstnr7079&
-
-#REST API
-kakao.client.id: e32a4d819f76b2ca4e652a2477ecf982
-
-#kakao pay
-kakao.admin.key: 9182554bcd6244da75828cfed4e62a65
-
-krbank:
-    apikey: A3KS6JOGXDYWDBC2XQ3Y
+    batch:
+        job:
+            enabled: true
+            names: ${job.name:NONE}
+        initialize-schema: never
+    main:
+        web-application-type: NONE

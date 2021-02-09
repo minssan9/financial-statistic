@@ -9,10 +9,10 @@ import lombok.Data;
 public class KrBankSchemaResponse {
 
     @SerializedName("StatisticTableList")
-    private KrBankSchemaResult krBankSchemaResult;
+    private StatisticTableList statisticTableList;
 
     @Data
-    public class KrBankSchemaResult {
+    public class StatisticTableList {
         @SerializedName("list_total_count")
         int list_total_count;
         @SerializedName("row")

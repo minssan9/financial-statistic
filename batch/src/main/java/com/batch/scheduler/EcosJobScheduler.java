@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class SampleJobScheduler {
+public class EcosJobScheduler {
     private final JobLauncher jobLauncher;
     private final EcosJobConfiguration ecosJobConfiguration;
 
