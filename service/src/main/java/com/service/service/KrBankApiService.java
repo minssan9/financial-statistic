@@ -87,15 +87,33 @@ public class KrBankApiService {
     //    http://ecos.bok.or.kr/api/StatisticTableList/sample/xml/kr/1/10/
     //    http://ecos.bok.or.kr/api/StatisticSearch/sample/xml/kr/1/10/010Y002/MM/201101/201101/AAAA11/
     public URI getUrlString(KrBankRequest krBankRequest) {
-        String uriString = krBankRequest.getUrl() + "/{serviceName}/{authKey}/{requestType}/{language}/{reqStartCount}/{reqEndCount}" +
+        String retString = krBankRequest.getUrl() + "/{serviceName}/{authKey}/{requestType}/{language}/{reqStartCount}/{reqEndCount}" +
                 "/{statisticCode}/{period}/{queryStartDate}/{queryEndDate}";
+
 //        Map<String, Object> params = new HashMap<String, Object>();
 
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        Map result = new ObjectMapper().convertValue(krBankRequest, Map.class);
-        return UriComponentsBuilder.fromUriString(uriString)
-                .buildAndExpand(new ObjectMapper().convertValue(krBankRequest, Map.class))
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map result = objectMapper.convertValue(krBankRequest, Map.class);
+
+
+        return UriComponentsBuilder.fromUriString(retString)
+                .buildAndExpand(result)
                 .toUri();
+
+//        params.put("authKey", this.authKey);
+//        params.put("requestType", this.requestType);
+//        params.put("language", this.language);
+//        params.put("statisticCode", this.statisticCode);
+//        params.put("option1", this.option1);
+//        params.put("option2", this.option2);
+//        params.put("option3", this.option3);
+//        params.put("queryStartDate", this.queryStartDate);
+//        params.put("queryEndDate", this.queryEndDate);
+//        params.put("reqStartCount", this.reqStartCount);
+//        params.put("reqEndCount", this.reqEndCount);
+//        params.put("period", this.period);
+
+//        return retString;
     }
 
 }
