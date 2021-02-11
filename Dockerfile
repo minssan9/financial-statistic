@@ -1,5 +1,4 @@
 FROM java:8
-
 # Add Author info
 LABEL maintainer="minssan9@gmail.com"
 
@@ -10,10 +9,10 @@ VOLUME /fn
 EXPOSE 54000
 
 # The application's jar file
-ARG JAR_FILE=build/libs/fn-*.jar
+ARG JAR_FILE=build/libs/*.jar
 
 # Add the application's jar to the container
-ADD ${JAR_FILE} fn-springboot.jar
+ADD ${JAR_FILE} app.jar
 
 # Run the jar file
-ENTRYPOINT ["java", "-jar","/fn-springboot.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar", "/app.jar"]
