@@ -4,6 +4,7 @@ plugins {
 
 group = 'com.voyagerss'
 version = '0.1.0'
+archivesBaseName = 'service'
 
 repositories {
 	mavenCentral()
