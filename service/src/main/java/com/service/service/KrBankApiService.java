@@ -41,16 +41,6 @@ public class KrBankApiService {
     @Autowired
     KrBankSchemaRepository krBankSchemaRepository;
 
-    List<KrBankData> saveData(List<KrBankData> krBankDatas) {
-        krBankDatas.forEach(i -> krBankDataRepository.save(i));
-        return krBankDatas;
-    }
-
-    List<KrBankSchema> saveSchema(List<KrBankSchema> krBankSchemas) {
-        krBankSchemas.forEach(i -> krBankSchemaRepository.save(i));
-        return krBankSchemas;
-    }
-
     public List<KrBankData> getDataFromAPI(KrBankRequest krBankRequest) {
         krBankRequest.setServiceName("StatisticSearch");
         krBankRequest.setAuthKey(krBankProperties.getApikey());
@@ -76,11 +66,11 @@ public class KrBankApiService {
     }
 
     public List<KrBankData> batchData(KrBankRequest krBankRequest) {
-        return saveData(getDataFromAPI(krBankRequest));
+        return krBankDataRepository.saveAll(getDataFromAPI(krBankRequest));
     }
 
     public List<KrBankSchema> batchSchema() {
-        return saveSchema(getSchemaFromAPI());
+        return krBankSchemaRepository.saveAll(getSchemaFromAPI());
     }
 
 

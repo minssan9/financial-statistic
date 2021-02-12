@@ -6,7 +6,9 @@ import com.service.domain.KrBankSchema;
 import com.service.dto.KrBankRequest;
 import com.service.repository.KrBankDataRepository;
 import com.service.repository.KrBankSchemaRepository;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 class KrBankServiceImpl implements KrBankService {
@@ -21,11 +23,13 @@ class KrBankServiceImpl implements KrBankService {
 
     @Override
     public List<KrBankSchema> getSchema(KrBankRequest krBankRequest) {
+
         return krBankSchemaRepository.findAll();
     }
 
     @Override
     public List<KrBankData> getData(KrBankRequest krBankRequest) {
+
         return krBankDataRepository.findAll();
     }
 }
