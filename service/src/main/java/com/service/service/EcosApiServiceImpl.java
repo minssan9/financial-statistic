@@ -65,7 +65,10 @@ public class EcosApiServiceImpl implements EcosApiService {
     public URI getUrlString(KrBankRequest krBankRequest) {
         String uriString = krBankRequest.getUrl() + "/{serviceName}/{authKey}/{requestType}/{language}/{reqStartCount}/{reqEndCount}" +
                 "/{statisticCode}/{period}/{queryStartDate}/{queryEndDate}";
+//        Map<String, Object> params = new HashMap<String, Object>();
 
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Map result = new ObjectMapper().convertValue(krBankRequest, Map.class);
         return UriComponentsBuilder.fromUriString(uriString)
                 .buildAndExpand(new ObjectMapper().convertValue(krBankRequest, Map.class))
                 .toUri();
