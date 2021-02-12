@@ -70,7 +70,7 @@ public class EcosApiServiceImpl implements EcosApiService {
                 .buildAndExpand(new ObjectMapper().convertValue(krBankRequest, Map.class))
                 .toUri();
     }
-
+    
     public List<KrBankData> getDataFromAPI(KrBankRequest krBankRequest) {
         krBankRequest.setServiceName("StatisticSearch");
         krBankRequest.setAuthKey(krBankProperties.getApikey());
