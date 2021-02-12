@@ -12,7 +12,7 @@ spring:
         include: core
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://shop.voyagerss.com:3306/charger?characterEncoding=utf8&serverTimezone=UTC&useUnicode=true&createDatabaseIfNotExist=true
+        url: jdbc:mysql://shop.voyagerss.com:3306/fn_statistic?characterEncoding=utf8&serverTimezone=UTC&useUnicode=true&createDatabaseIfNotExist=true
         username: charger
         password: wjsrlck1@
         dbcp2:

@@ -3,6 +3,7 @@ package com.service.dto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.config.KrBankProperties;
 import com.service.domain.KrBankSchema;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 @Data
 @NoArgsConstructor
+@Builder
 public class KrBankRequest {
     String serviceName = "";
     String url = "http://ecos.bok.or.kr/api";

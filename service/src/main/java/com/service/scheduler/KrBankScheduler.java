@@ -23,6 +23,8 @@ public class KrBankScheduler {
 		String nowTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
 
 		krBankAPIBatchService.saveAllBySchema(nowDate, nowDate);
+		krBankAPIBatchService.batchKOSPI(nowDate);
+		krBankAPIBatchService.batchKOSDAQ(nowDate);
 	}
 
 	@Scheduled(fixedDelay = 1000)

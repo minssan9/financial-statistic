@@ -25,7 +25,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @Service
-public class KrBankApiService {
+public class EcosApiServiceImpl implements EcosApiService {
     @Autowired
     Gson gson;
 
@@ -41,34 +41,21 @@ public class KrBankApiService {
     @Autowired
     KrBankSchemaRepository krBankSchemaRepository;
 
-    List<KrBankData> saveData(List<KrBankData> krBankDatas) {
-        krBankDatas.forEach(i -> krBankDataRepository.save(i));
-        return krBankDatas;
-    }
-
-    List<KrBankSchema> saveSchema(List<KrBankSchema> krBankSchemas) {
-        krBankSchemas.forEach(i -> krBankSchemaRepository.save(i));
-        return krBankSchemas;
-    }
-
     public List<KrBankData> getDataFromAPI(KrBankRequest krBankRequest) {
         krBankRequest.setServiceName("StatisticSearch");
         krBankRequest.setAuthKey(krBankProperties.getApikey());
         krBankRequest.setPeriod("DD");
-//        ResponseEntity<String> response = restTemplate.getForEntity(krBankRequest.getUrlString(), String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
 //        KrBankDataResponse krBankDataResponse = gson.fromJson(response.getBody(), KrBankDataResponse.class);
 
-        List<KrBankData> krBankDatas = gson.fromJson(
-                restTemplate.getForEntity(getUrlString(krBankRequest), String.class).getBody(),
-                KrBankDataResponse.class
-        ).getStatisticSearch().getRow();
-        return krBankDatas;
+        return gson.fromJson(response.getBody(), KrBankDataResponse.class).getStatisticSearch().getRow();
     }
 
     public List<KrBankSchema> getSchemaFromAPI() {
-        KrBankRequest krBankRequest = new KrBankRequest();
-        krBankRequest.setServiceName("StatisticTableList");
-        krBankRequest.setAuthKey(krBankProperties.getApikey());
+        KrBankRequest krBankRequest = KrBankRequest.builder()
+                .serviceName("StatisticTableList")
+                .authKey(krBankProperties.getApikey())
+                .build();
 
         ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
         KrBankSchemaResponse krBankSchemaResponse = gson.fromJson(response.getBody(), KrBankSchemaResponse.class);
@@ -76,11 +63,11 @@ public class KrBankApiService {
     }
 
     public List<KrBankData> batchData(KrBankRequest krBankRequest) {
-        return saveData(getDataFromAPI(krBankRequest));
+        return krBankDataRepository.saveAll(getDataFromAPI(krBankRequest));
     }
 
     public List<KrBankSchema> batchSchema() {
-        return saveSchema(getSchemaFromAPI());
+        return krBankSchemaRepository.saveAll(getSchemaFromAPI());
     }
 
 
@@ -89,13 +76,35 @@ public class KrBankApiService {
     public URI getUrlString(KrBankRequest krBankRequest) {
         String uriString = krBankRequest.getUrl() + "/{serviceName}/{authKey}/{requestType}/{language}/{reqStartCount}/{reqEndCount}" +
                 "/{statisticCode}/{period}/{queryStartDate}/{queryEndDate}";
-//        Map<String, Object> params = new HashMap<String, Object>();
 
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        Map result = new ObjectMapper().convertValue(krBankRequest, Map.class);
         return UriComponentsBuilder.fromUriString(uriString)
                 .buildAndExpand(new ObjectMapper().convertValue(krBankRequest, Map.class))
                 .toUri();
     }
 
+    public List<KrBankSchema> saveAllBySchema(String startDate, String endDate) {
+        List<KrBankSchema> krBankSchemas = krBankSchemaRepository.findAll();
+        krBankSchemas.forEach(i -> {
+            KrBankRequest krBankRequest = new KrBankRequest(i);
+            krBankRequest.setQueryStartDate(startDate);
+            krBankRequest.setQueryEndDate(endDate);
+            batchData(krBankRequest);
+        });
+        return krBankSchemas;
+    }
+
+    public List<KrBankData> batchKOSPI(String queryDate) {
+        return batchData(
+                new KrBankRequest("064Y001", "0001000", "", "", queryDate, queryDate, "DD", 1L, 1000L)
+        );
+    }
+
+
+    public List<KrBankData> batchKOSDAQ(String queryDate) {
+        List<KrBankData> krBankDataList = getDataFromAPI(
+                new KrBankRequest("064Y001", "0001000", "", "", queryDate, queryDate, "DD", 1L, 1000L)
+        );
+
+        return krBankDataRepository.saveAll(krBankDataList);
+    }
 }

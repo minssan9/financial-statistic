@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class KrBankData  implements Serializable {
         @Column(name = "id")
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue
         Long id;
 
         @SerializedName("UNIT_NAME")  @Expose @Column(name = "UNIT_NAME")         String unit_name;

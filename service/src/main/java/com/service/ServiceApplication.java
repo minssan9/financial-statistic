@@ -1,15 +1,12 @@
 package com.service;
 
-import com.service.dto.KrBankRequest;
-import com.service.service.KrBankAPIBatchService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.service.service.KrBankApiService;
+import com.service.service.EcosApiServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,10 +32,10 @@ public class ServiceApplication {
     public static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 
     @Autowired
-    KrBankAPIBatchService krBankAPIBatchService;
+    EcosAPIBatchImpl ecosAPIBatchImpl;
 
     @Autowired
-    KrBankApiService krBankApiService;
+    EcosApiServiceImpl ecosApiServiceImpl;
 
 
     @Value("${file.upload-dir}")
@@ -50,17 +47,13 @@ public class ServiceApplication {
 
     @Bean
     public ApplicationRunner applicationRunner() {
-        return new ApplicationRunner() {
-            @Override
-            public void run(ApplicationArguments args) throws Exception {
-				LocalDateTime oldDateTime = LocalDateTime.now().minusDays(150);
-                String todayString = LocalDateTime.now().minusDays(5L).format(dateFormatString);
+        return args -> {
+            LocalDateTime oldDateTime = LocalDateTime.now().minusDays(150);
+            String todayString = LocalDateTime.now().minusDays(2L).format(dateFormatString);
 
-                krBankAPIBatchService.batchKOSPI(todayString);
 
-//                krBankApiService.batchSchema();
+//                krBankAPIBatchService.batchKOSPI(todayString);
 //                krBankAPIBatchService.saveAllBySchema(todayString, todayString);
-            }
         };
     }
 

@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class KrBankSchema {
         @Column(name = "id")
-        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        @Id @GeneratedValue
         Long id;
 
         @SerializedName("P_STAT_CODE") @Expose @Column(name = "P_STAT_CODE") String pstatcode; // 상위 통계표 코드

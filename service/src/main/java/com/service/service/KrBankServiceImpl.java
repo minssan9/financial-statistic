@@ -4,8 +4,8 @@ import com.service.config.KrBankProperties;
 import com.service.domain.KrBankData;
 import com.service.domain.KrBankSchema;
 import com.service.dto.KrBankRequest;
-import com.service.repository.KrBankDataRepository;
-import com.service.repository.KrBankSchemaRepository;
+import com.service.repository.EcosDataRepo;
+import com.service.repository.EcosSchemaRepo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,18 +14,18 @@ class KrBankServiceImpl implements KrBankService {
     private KrBankProperties krBankProperties;
 
     @Autowired
-    KrBankDataRepository krBankDataRepository;
+    EcosDataRepo ecosDataRepo;
 
     @Autowired
-    KrBankSchemaRepository krBankSchemaRepository;
+    EcosSchemaRepo ecosSchemaRepo;
 
     @Override
     public List<KrBankSchema> getSchema(KrBankRequest krBankRequest) {
-        return krBankSchemaRepository.findAll();
+        return ecosSchemaRepo.findAll();
     }
 
     @Override
     public List<KrBankData> getData(KrBankRequest krBankRequest) {
-        return krBankDataRepository.findAll();
+        return ecosDataRepo.findAll();
     }
 }

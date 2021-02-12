@@ -2,7 +2,7 @@ package com.service.controller;
 
 import com.service.domain.KrBankData;
 import com.service.dto.KrBankRequest;
-import com.service.service.KrBankApiService;
+import com.service.service.EcosApiServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("ecos")
 class KrBankController {
     @Autowired
-    private KrBankApiService krBankApiService ;
+    private EcosApiServiceImpl ecosApiServiceImpl;
 
 
     @GetMapping("schema/list/{statname}/{startPos}/{endPos}")
     private ResponseEntity getSchema( ) {
         return ResponseEntity
                 .ok()
-            .body(krBankApiService.getSchemaFromAPI());
+            .body(ecosApiServiceImpl.getSchemaFromAPI());
     }
 
     @Operation(summary = "Get Data by Date",
@@ -47,7 +47,7 @@ class KrBankController {
         KrBankRequest krBankRequest = new KrBankRequest("","","","","","" ,"DD",startPos, endPos);
         return ResponseEntity
             .ok()
-            .body(krBankApiService.getDataFromAPI(krBankRequest));
+            .body(ecosApiServiceImpl.getDataFromAPI(krBankRequest));
     }
 //    @GetMapping("/{date}")
 //    private  getTemplateById(@PathVariable date: String): ResponseEntity<Any> {
