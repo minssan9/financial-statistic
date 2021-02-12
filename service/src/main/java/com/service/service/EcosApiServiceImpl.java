@@ -7,8 +7,8 @@ import com.service.domain.KrBankSchema;
 import com.service.dto.KrBankDataResponse;
 import com.service.dto.KrBankRequest;
 import com.service.dto.KrBankSchemaResponse;
-import com.service.repository.KrBankDataRepository;
-import com.service.repository.KrBankSchemaRepository;
+import com.service.repository.EcosDataRepo;
+import com.service.repository.EcosSchemaRepo;
 import com.google.gson.Gson;
 
 import java.net.URI;
@@ -36,15 +36,46 @@ public class EcosApiServiceImpl implements EcosApiService {
     KrBankProperties krBankProperties;
 
     @Autowired
-    KrBankDataRepository krBankDataRepository;
-
+    EcosDataRepo ecosDataRepo;
     @Autowired
-    KrBankSchemaRepository krBankSchemaRepository;
+    EcosSchemaRepo ecosSchemaRepo;
+
+    public List<KrBankData> batchData(KrBankRequest krBankRequest) {
+        return ecosDataRepo.saveAll(getDataFromAPI(krBankRequest));
+    }
+
+    public List<KrBankSchema> batchSchema() {
+        return ecosSchemaRepo.saveAll(getSchemaFromAPI());
+    }
+
+    public List<KrBankSchema> saveDataEachSchema(String startDate, String endDate) {
+        List<KrBankSchema> krBankSchemas = ecosSchemaRepo.findAll();
+        krBankSchemas.forEach(i -> {
+            KrBankRequest krBankRequest = new KrBankRequest(i);
+            krBankRequest.setQueryStartDate(startDate);
+            krBankRequest.setQueryEndDate(endDate);
+            batchData(krBankRequest);
+        });
+        return krBankSchemas;
+    }
+
+
+    //    http://ecos.bok.or.kr/api/StatisticTableList/sample/xml/kr/1/10/
+    //    http://ecos.bok.or.kr/api/StatisticSearch/sample/xml/kr/1/10/010Y002/MM/201101/201101/AAAA11/
+    public URI getUrlString(KrBankRequest krBankRequest) {
+        String uriString = krBankRequest.getUrl() + "/{serviceName}/{authKey}/{requestType}/{language}/{reqStartCount}/{reqEndCount}" +
+                "/{statisticCode}/{period}/{queryStartDate}/{queryEndDate}";
+
+        return UriComponentsBuilder.fromUriString(uriString)
+                .buildAndExpand(new ObjectMapper().convertValue(krBankRequest, Map.class))
+                .toUri();
+    }
 
     public List<KrBankData> getDataFromAPI(KrBankRequest krBankRequest) {
         krBankRequest.setServiceName("StatisticSearch");
         krBankRequest.setAuthKey(krBankProperties.getApikey());
         krBankRequest.setPeriod("DD");
+
         ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
 //        KrBankDataResponse krBankDataResponse = gson.fromJson(response.getBody(), KrBankDataResponse.class);
 
@@ -60,51 +91,5 @@ public class EcosApiServiceImpl implements EcosApiService {
         ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
         KrBankSchemaResponse krBankSchemaResponse = gson.fromJson(response.getBody(), KrBankSchemaResponse.class);
         return krBankSchemaResponse.getStatisticTableList().getKrBankSchema();
-    }
-
-    public List<KrBankData> batchData(KrBankRequest krBankRequest) {
-        return krBankDataRepository.saveAll(getDataFromAPI(krBankRequest));
-    }
-
-    public List<KrBankSchema> batchSchema() {
-        return krBankSchemaRepository.saveAll(getSchemaFromAPI());
-    }
-
-
-    //    http://ecos.bok.or.kr/api/StatisticTableList/sample/xml/kr/1/10/
-    //    http://ecos.bok.or.kr/api/StatisticSearch/sample/xml/kr/1/10/010Y002/MM/201101/201101/AAAA11/
-    public URI getUrlString(KrBankRequest krBankRequest) {
-        String uriString = krBankRequest.getUrl() + "/{serviceName}/{authKey}/{requestType}/{language}/{reqStartCount}/{reqEndCount}" +
-                "/{statisticCode}/{period}/{queryStartDate}/{queryEndDate}";
-
-        return UriComponentsBuilder.fromUriString(uriString)
-                .buildAndExpand(new ObjectMapper().convertValue(krBankRequest, Map.class))
-                .toUri();
-    }
-
-    public List<KrBankSchema> saveAllBySchema(String startDate, String endDate) {
-        List<KrBankSchema> krBankSchemas = krBankSchemaRepository.findAll();
-        krBankSchemas.forEach(i -> {
-            KrBankRequest krBankRequest = new KrBankRequest(i);
-            krBankRequest.setQueryStartDate(startDate);
-            krBankRequest.setQueryEndDate(endDate);
-            batchData(krBankRequest);
-        });
-        return krBankSchemas;
-    }
-
-    public List<KrBankData> batchKOSPI(String queryDate) {
-        return batchData(
-                new KrBankRequest("064Y001", "0001000", "", "", queryDate, queryDate, "DD", 1L, 1000L)
-        );
-    }
-
-
-    public List<KrBankData> batchKOSDAQ(String queryDate) {
-        List<KrBankData> krBankDataList = getDataFromAPI(
-                new KrBankRequest("064Y001", "0001000", "", "", queryDate, queryDate, "DD", 1L, 1000L)
-        );
-
-        return krBankDataRepository.saveAll(krBankDataList);
     }
 }

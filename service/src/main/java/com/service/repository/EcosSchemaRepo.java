@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public
-interface KrBankSchemaRepository extends JpaRepository<KrBankSchema, Long> {
+interface EcosSchemaRepo extends JpaRepository<KrBankSchema, Long> {
 
 }
