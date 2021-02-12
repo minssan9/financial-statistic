@@ -1,61 +1,50 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.4.RELEASE'
+    id 'org.springframework.boot' version '2.4.2'
 }
 
-group = 'com.minssan9'
-version = '1.0-SNAPSHOT'
+group  'com.minssan9'
 
-//buildDir('build')
-
-repositories {
-    mavenCentral()
-}
-apply plugin: 'java'
-apply plugin: 'io.spring.dependency-management'
-
-sourceCompatibility = 11
+allprojects {
 
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-aop'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-//	implementation 'org.springframework.boot:spring-boot-starter-quartz'
-//	implementation 'org.springframework:spring-jdbc'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
-    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.2'
-    compileOnly 'org.projectlombok:lombok'
-
-//	implementation 'commons-dbcp:commons-dbcp:1.4'
-    implementation 'com.zaxxer:HikariCP'
-    runtimeOnly 'mysql:mysql-connector-java'
-//	runtimeOnly 'com.h2database:h2'
-
-    implementation 'com.google.code.gson:gson'
-    implementation 'com.googlecode.json-simple:json-simple:1.1'
-
-    implementation 'io.springfox:springfox-swagger2:2.9.2'
-    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-
-    implementation 'org.slf4j:slf4j-api:1.7.25'
-    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-    compile 'com.googlecode.json-simple:json-simple:1.1.1'
-    implementation 'com.fasterxml.jackson.core:jackson-databind'
-
-    annotationProcessor 'org.projectlombok:lombok'
-//		providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-
-    testImplementation 'junit:junit:4.12'
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
-test {
-    useJUnitPlatform()
-}
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
 
-project.buildDir = '/build'
-jar {
-    archiveBaseName = 'charger'
-    archiveVersion =  '0.1.0'
+    sourceCompatibility = 11
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        compile 'org.springframework.boot:spring-boot-starter-web'
+
+        implementation 'org.springdoc:springdoc-openapi-ui:1.5.3'
+
+        implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.2'
+        implementation 'com.google.code.gson:gson'
+
+        runtimeOnly 'mysql:mysql-connector-java'
+        implementation 'com.zaxxer:HikariCP'
+
+        implementation 'org.slf4j:slf4j-api:1.7.25'
+
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    }
+
+
+    test {
+        useJUnitPlatform()
+    }
 }
