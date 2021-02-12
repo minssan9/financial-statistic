@@ -1,0 +1,43 @@
+version: "3.2"      # version 정보를 작성합니다.
+services:           # service 목록을 정의합니다.
+  mongodb:          # service의 이름입니다.
+    image: mongo    # 해당 service에서 사용할 image입니다.
+    restart: always # container를 실행할 때 항상 이미 수행중이라면 재시작을 수행합니다.
+    environment:    # 환경변수를 정의합니다.
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:        # container -> local로 mount할 수 있습니다.
+      - type: bind
+        source: ./data/mongn # local 경로
+        target: /data/mongo  # container 내부에서의 경로
+    container_name: "mongodb" # container의 name을 정의합니다.
+    ports:                # service port를 정의합니다.
+      - "27017:27017"     # local:container
+
+  mysql:          # service의 이름입니다.
+    image: mysql    # 해당 service에서 사용할 image입니다.
+    restart: always # container를 실행할 때 항상 이미 수행중이라면 재시작을 수행합니다.
+    environment:    # 환경변수를 정의합니다.
+      MYSQL_INITDB_ROOT_USERNAME: root
+      MYSQL_INITDB_ROOT_PASSWORD: 123456
+    volumes:        # container -> local로 mount할 수 있습니다.
+      - type: bind
+        source: ./data/mysql # local 경로
+        target: /data/mysql  # container 내부에서의 경로
+    container_name: "mongodb" # container의 name을 정의합니다.
+    ports:                # service port를 정의합니다.
+      - "3306:3306"     # local:container
+
+  fn-service:          # service의 이름입니다.
+    image: fn-service    # 해당 service에서 사용할 image입니다.
+    restart: always # container를 실행할 때 항상 이미 수행중이라면 재시작을 수행합니다.
+    environment:    # 환경변수를 정의합니다.
+      MYSQL_INITDB_ROOT_USERNAME:
+    volumes:        # container -> local로 mount할 수 있습니다.
+      - type: bind
+        source: ./logs # local 경로
+        target: /logs  # container 내부에서의 경로
+    container_name: "fn-service" # container의 name을 정의합니다.
+    ports:                # service port를 정의합니다.
+      - "54000:54000"     # local:container
+
