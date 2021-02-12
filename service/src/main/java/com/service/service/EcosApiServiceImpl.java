@@ -59,18 +59,8 @@ public class EcosApiServiceImpl implements EcosApiService {
         return krBankSchemas;
     }
 
+ 
 
-    //    http://ecos.bok.or.kr/api/StatisticTableList/sample/xml/kr/1/10/
-    //    http://ecos.bok.or.kr/api/StatisticSearch/sample/xml/kr/1/10/010Y002/MM/201101/201101/AAAA11/
-    public URI getUrlString(KrBankRequest krBankRequest) {
-        String uriString = krBankRequest.getUrl() + "/{serviceName}/{authKey}/{requestType}/{language}/{reqStartCount}/{reqEndCount}" +
-                "/{statisticCode}/{period}/{queryStartDate}/{queryEndDate}";
-
-        return UriComponentsBuilder.fromUriString(uriString)
-                .buildAndExpand(new ObjectMapper().convertValue(krBankRequest, Map.class))
-                .toUri();
-    }
-    
     public List<KrBankData> getDataFromAPI(KrBankRequest krBankRequest) {
         krBankRequest.setServiceName("StatisticSearch");
         krBankRequest.setAuthKey(krBankProperties.getApikey());
@@ -91,5 +81,21 @@ public class EcosApiServiceImpl implements EcosApiService {
         ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
         KrBankSchemaResponse krBankSchemaResponse = gson.fromJson(response.getBody(), KrBankSchemaResponse.class);
         return krBankSchemaResponse.getStatisticTableList().getKrBankSchema();
+    }
+
+
+
+    //    http://ecos.bok.or.kr/api/StatisticTableList/sample/xml/kr/1/10/
+    //    http://ecos.bok.or.kr/api/StatisticSearch/sample/xml/kr/1/10/010Y002/MM/201101/201101/AAAA11/
+    public URI getUrlString(KrBankRequest krBankRequest) {
+        String uriString = krBankRequest.getUrl() + "/{serviceName}/{authKey}/{requestType}/{language}/{reqStartCount}/{reqEndCount}" +
+                "/{statisticCode}/{period}/{queryStartDate}/{queryEndDate}";
+//        Map<String, Object> params = new HashMap<String, Object>();
+
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Map result = new ObjectMapper().convertValue(krBankRequest, Map.class);
+        return UriComponentsBuilder.fromUriString(uriString)
+                .buildAndExpand(new ObjectMapper().convertValue(krBankRequest, Map.class))
+                .toUri();
     }
 }
