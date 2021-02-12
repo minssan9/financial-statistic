@@ -6,6 +6,7 @@ import com.service.dto.KrBankRequest;
 import com.service.repository.KrBankDataRepository;
 import com.service.repository.KrBankSchemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +20,13 @@ public class KrBankAPIBatchService {
     @Autowired
     KrBankApiService krBankApiService;
 
+    @Async("threadPoolTaskExecutor")
     public void saveAllBySchema(String startDate, String endDate) {
         List<KrBankSchema> krBankSchemas = krBankSchemaRepository.findAll();
         krBankSchemas.forEach(i -> {
             KrBankRequest krBankRequest =new KrBankRequest(i);
+            krBankRequest.setStatisticCode(i.getPstatcode());
+            krBankRequest.setStatisticCode(i.getStatcode());
             krBankRequest.setQueryStartDate( startDate);
             krBankRequest.setQueryEndDate( endDate);
             krBankApiService.batchData(krBankRequest);
@@ -34,7 +38,6 @@ public class KrBankAPIBatchService {
                 new KrBankRequest("064Y001", "0001000", "", "", queryDate, queryDate,"DD", 1L, 1000L)
         );
     }
-
 
     public List<KrBankData> batchKOSDAQ(String queryDate) {
         List<KrBankData> krBankDataList = krBankApiService.getDataFromAPI(
