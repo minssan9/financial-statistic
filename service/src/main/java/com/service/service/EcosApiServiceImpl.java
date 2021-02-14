@@ -2,11 +2,14 @@ package com.service.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.config.KrBankProperties;
+import com.service.domain.EcosDataMongo;
 import com.service.domain.KrBankData;
 import com.service.domain.KrBankSchema;
 import com.service.dto.KrBankDataResponse;
 import com.service.dto.KrBankRequest;
 import com.service.dto.KrBankSchemaResponse;
+import com.service.mongorepo.EcosDataMongoRepo;
+import com.service.mongorepo.EcosSchemaMongoRepo;
 import com.service.repository.EcosDataRepo;
 import com.service.repository.EcosSchemaRepo;
 import com.google.gson.Gson;
@@ -26,14 +29,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Slf4j
 @Service
 public class EcosApiServiceImpl implements EcosApiService {
-    @Autowired
-    Gson gson;
+    @Autowired    Gson gson;
+    @Autowired    RestTemplate restTemplate;
+    @Autowired    KrBankProperties krBankProperties;
 
-    @Autowired
-    RestTemplate restTemplate;
-
-    @Autowired
-    KrBankProperties krBankProperties;
+    @Autowired    EcosDataMongoRepo ecosDataMongoRepo;
+    @Autowired    EcosSchemaMongoRepo ecosSchemaMongoRepo;
 
     @Autowired
     EcosDataRepo ecosDataRepo;
@@ -41,11 +42,28 @@ public class EcosApiServiceImpl implements EcosApiService {
     EcosSchemaRepo ecosSchemaRepo;
 
     public List<KrBankData> batchData(KrBankRequest krBankRequest) {
-        return ecosDataRepo.saveAll(getDataFromAPI(krBankRequest));
+        krBankRequest.setServiceName("StatisticSearch");
+        krBankRequest.setAuthKey(krBankProperties.getApikey());
+        krBankRequest.setPeriod("DD");
+
+        ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
+        List<KrBankData> krBankDatas = gson.fromJson(response.getBody(), KrBankDataResponse.class).getStatisticSearch().getRow();
+
+        ecosDataMongoRepo.saveAll(krBankDatas);
+        return ecosDataRepo.saveAll(krBankDatas);
     }
 
     public List<KrBankSchema> batchSchema() {
-        return ecosSchemaRepo.saveAll(getSchemaFromAPI());
+        KrBankRequest krBankRequest = new KrBankRequest();
+        krBankRequest.setServiceName("StatisticTableList");
+        krBankRequest.setAuthKey(krBankProperties.getApikey());
+
+
+        ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
+        List<KrBankSchema> krBankSchemas = gson.fromJson(response.getBody(), KrBankSchemaResponse.class).getStatisticTableList().getKrBankSchema();
+
+        ecosSchemaMongoRepo.saveAll(krBankSchemas);
+        return ecosSchemaRepo.saveAll(krBankSchemas);
     }
 
     public List<KrBankSchema> saveDataEachSchema(String startDate, String endDate) {
@@ -65,34 +83,29 @@ public class EcosApiServiceImpl implements EcosApiService {
     public URI getUrlString(KrBankRequest krBankRequest) {
         String uriString = krBankRequest.getUrl() + "/{serviceName}/{authKey}/{requestType}/{language}/{reqStartCount}/{reqEndCount}" +
                 "/{statisticCode}/{period}/{queryStartDate}/{queryEndDate}";
-//        Map<String, Object> params = new HashMap<String, Object>();
-
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        Map result = new ObjectMapper().convertValue(krBankRequest, Map.class);
         return UriComponentsBuilder.fromUriString(uriString)
                 .buildAndExpand(new ObjectMapper().convertValue(krBankRequest, Map.class))
                 .toUri();
     }
 
-    public List<KrBankData> getDataFromAPI(KrBankRequest krBankRequest) {
-        krBankRequest.setServiceName("StatisticSearch");
-        krBankRequest.setAuthKey(krBankProperties.getApikey());
-        krBankRequest.setPeriod("DD");
-
-        ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
-//        KrBankDataResponse krBankDataResponse = gson.fromJson(response.getBody(), KrBankDataResponse.class);
-
-        return gson.fromJson(response.getBody(), KrBankDataResponse.class).getStatisticSearch().getRow();
-    }
-
-    public List<KrBankSchema> getSchemaFromAPI() {
-        KrBankRequest krBankRequest = KrBankRequest.builder()
-                .serviceName("StatisticTableList")
-                .authKey(krBankProperties.getApikey())
-                .build();
-
-        ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
-        KrBankSchemaResponse krBankSchemaResponse = gson.fromJson(response.getBody(), KrBankSchemaResponse.class);
-        return krBankSchemaResponse.getStatisticTableList().getKrBankSchema();
-    }
+//    public List<KrBankData> getDataFromAPI(KrBankRequest krBankRequest) {
+//        krBankRequest.setServiceName("StatisticSearch");
+//        krBankRequest.setAuthKey(krBankProperties.getApikey());
+//        krBankRequest.setPeriod("DD");
+//
+//        ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
+////        KrBankDataResponse krBankDataResponse = gson.fromJson(response.getBody(), KrBankDataResponse.class);
+//        return gson.fromJson(response.getBody(), KrBankDataResponse.class).getStatisticSearch().getRow();
+//    }
+//
+//    public List<KrBankSchema> getSchemaFromAPI() {
+//        KrBankRequest krBankRequest = KrBankRequest.builder()
+//                .serviceName("StatisticTableList")
+//                .authKey(krBankProperties.getApikey())
+//                .build();
+//
+//        ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
+//        KrBankSchemaResponse krBankSchemaResponse = gson.fromJson(response.getBody(), KrBankSchemaResponse.class);
+//        return krBankSchemaResponse.getStatisticTableList().getKrBankSchema();
+//    }
 }

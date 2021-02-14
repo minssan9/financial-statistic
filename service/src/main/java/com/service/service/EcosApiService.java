@@ -16,8 +16,8 @@ import java.util.Map;
 
 @Service
 public interface EcosApiService {
-    List<KrBankData> getDataFromAPI(KrBankRequest krBankRequest)  ;
-    List<KrBankSchema> getSchemaFromAPI() ;
+//    List<KrBankData> getDataFromAPI(KrBankRequest krBankRequest)  ;
+//    List<KrBankSchema> getSchemaFromAPI() ;
 
     List<KrBankData> batchData(KrBankRequest krBankRequest) ;
     List<KrBankSchema> batchSchema();

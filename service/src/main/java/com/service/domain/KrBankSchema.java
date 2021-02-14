@@ -10,11 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Entity
 @NoArgsConstructor
 @Table(name = "krbankschema")
 @Data
+@Document
 public class KrBankSchema {
         @Column(name = "id")
         @Id @GeneratedValue

@@ -21,8 +21,9 @@ subprojects {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation 'org.springframework.boot:spring-boot-starter-aop'
-        implementation 'org.springframework.boot:spring-boot-starter-security'
-        compile 'org.springframework.boot:spring-boot-starter-web'
+//        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
 
         implementation 'org.springdoc:springdoc-openapi-ui:1.5.3'
 
@@ -30,7 +31,6 @@ subprojects {
         implementation 'com.google.code.gson:gson'
 
         runtimeOnly 'mysql:mysql-connector-java'
-        implementation 'com.zaxxer:HikariCP'
 
         implementation 'org.slf4j:slf4j-api:1.7.25'
 
@@ -39,8 +39,7 @@ subprojects {
         annotationProcessor 'org.projectlombok:lombok'
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+//        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     }
 
 
