@@ -1,18 +1,12 @@
 package com.service.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.domain.KrBankData;
 import com.service.domain.KrBankSchema;
-import com.service.dto.KrBankDataResponse;
 import com.service.dto.KrBankRequest;
-import com.service.dto.KrBankSchemaResponse;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public interface EcosApiService {

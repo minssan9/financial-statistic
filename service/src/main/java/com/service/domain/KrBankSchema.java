@@ -27,7 +27,7 @@ public class KrBankSchema {
         @SerializedName("STAT_NAME") @Expose @Column(name = "STAT_NAME") String statname; // 1.통화 및 유동성지표
         @SerializedName("CYCLE") @Expose @Column(name = "CYCLE")  String cycle;    //        주기
         @SerializedName("ORG_NAME") @Expose @Column(name = "ORG_NAME") String orgname;         // 출처
-        @SerializedName("SRCH_YN") @Expose @Column(name = "SRCH_YN") String srchyn; // N
+        @SerializedName("SRCH_YN") @Expose @Column(name = "SRCH_YN") String searchFlag; // N
 
 //        상위통계표코드	P_STAT_CODE	8	000Y074	상위통계표코드
 //        통계표코드	STAT_CODE	8	000Y702

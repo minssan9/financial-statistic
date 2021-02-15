@@ -1,27 +1,19 @@
 package com.service.dto;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.service.config.KrBankProperties;
 import com.service.domain.KrBankSchema;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
+import static com.service.ServiceApplication.ECOS_API_KEY;
 
 @Data
 @NoArgsConstructor
-@Builder
 public class KrBankRequest {
     String serviceName = "";
     String url = "http://ecos.bok.or.kr/api";
 
 
-    String authKey = "";
+    String authKey = ECOS_API_KEY;
     String requestType = "json";
     String language = "kr";
     String period = "";

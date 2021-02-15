@@ -1,15 +1,13 @@
 package com.service.domain;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-@Entity
 @NoArgsConstructor
 @Document
 @Data
@@ -30,4 +28,13 @@ public class EcosSchemaMongo {
 //        주기	CYCLE	2	YY, QQ, MM, DD	주기(년, 분기, 월, 일)
 //        검색가능여부	SRCH_YN	1	Y/N	검색가능여부
 //        출처	ORG_NAME	50	국제통화기금(IMF)	출처
+
+        public EcosSchemaMongo(KrBankSchema krBankSchema){
+                this.pstatcode = krBankSchema.getPstatcode();
+                this.statcode = krBankSchema.getStatcode();
+                this.statname = krBankSchema.getStatname();
+                this.cycle = krBankSchema.getCycle();
+                this.orgname = krBankSchema.getOrgname();
+                this.srchyn = krBankSchema.getSearchFlag();
+        }
 }

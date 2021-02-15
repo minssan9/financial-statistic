@@ -8,7 +8,7 @@ spring:
   datasource:
     #        driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://shop.voyagerss.com:3306/fn_statistic?characterEncoding=utf8&serverTimezone=UTC
-    username: fn-service
+    username: fn
     password: dugodwk1
   jpa:
     show-sql: false
@@ -23,11 +23,33 @@ spring:
   #    autoconfigure.exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   data:
     mongodb:
-      host: mongodb+srv://fn-service:dugodwk1@shop.voyagerss.com/main?authSource=admin&retryWrites=true
-      database: fn-statistic
+      host: mongodb://fn:dugodwk1@shop.voyagerss.com/fn?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000
+      database: fn
       authentication-database: admin
-      username: fn-service
+      username: fn
       password: dugodwk1
+  mvc:
+      throw-exception-if-no-handler-found: true
+  resources:
+      add-mappings: false
+
+#OAuth2
+encodeKey: secret
+#Email account info
+email.account: en9door
+email.password: dbstnr7079&
+#REST API
+kakao.client.id: e32a4d819f76b2ca4e652a2477ecf982
+#kakao pay
+kakao.admin.key: 9182554bcd6244da75828cfed4e62a65
+
+#app:
+ecos-api-key: A3KS6JOGXDYWDBC2XQ3Y
+file:
+  upload-dir: C:\ftp
+
+
+
 ---
 spring:
   config:
@@ -44,18 +66,3 @@ spring:
     hibernate:
       ddl-auto: update
 
-
-#OAuth2
-encodeKey: secret
-#Email account info
-email.account: en9door
-email.password: dbstnr7079&
-#REST API
-kakao.client.id: e32a4d819f76b2ca4e652a2477ecf982
-#kakao pay
-kakao.admin.key: 9182554bcd6244da75828cfed4e62a65
-
-krbank:
-  apikey: A3KS6JOGXDYWDBC2XQ3Y
-file:
-  upload-dir: C:\ftp

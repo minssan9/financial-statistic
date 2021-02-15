@@ -33,13 +33,14 @@ subprojects {
         runtimeOnly 'mysql:mysql-connector-java'
 
         implementation 'org.slf4j:slf4j-api:1.7.25'
+        implementation 'junit:junit:4.11'
 
 
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     }
 
 

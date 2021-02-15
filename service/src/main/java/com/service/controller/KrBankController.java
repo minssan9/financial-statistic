@@ -1,34 +1,46 @@
 package com.service.controller;
 
+import com.service.domain.EcosSchemaMongo;
 import com.service.domain.KrBankData;
+import com.service.domain.KrBankSchema;
 import com.service.dto.KrBankRequest;
-import com.service.service.EcosApiServiceImpl;
+import com.service.repository.EcosDataRepo;
+import com.service.repository.EcosSchemaRepo;
+import com.service.service.KrBankService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-;
-;
 
 @Tag(name = "ecos data source example", description = "This controller is for the test")
-@RestController("ecos")
+@RestController("fn")
 class KrBankController {
     @Autowired
-    private EcosApiServiceImpl ecosApiServiceImpl;
+    private KrBankService krBankService;
+
+    @Autowired
+    private EcosSchemaRepo ecosSchemaRepo;
+    @Autowired
+    private EcosDataRepo ecosDataRepo;
 
 
-    @GetMapping("schema/list/{statname}/{startPos}/{endPos}")
-    private ResponseEntity getSchema( ) {
+    @GetMapping("schema/list")
+    private ResponseEntity getSchema(Pageable pageable  ) {
+
+        Page<KrBankSchema> krBankSchemas = ecosSchemaRepo.findAll(pageable);
         return ResponseEntity
                 .ok()
-            .body(ecosApiServiceImpl.getSchemaFromAPI());
+            .body(krBankSchemas );
     }
 
     @Operation(summary = "Get Data by Date",
@@ -43,11 +55,13 @@ class KrBankController {
         }
     )
     @GetMapping("data/{code}/{option1}/{startDate}/{endDate}")
-    private ResponseEntity getData(@PathVariable String code, @PathVariable String option1,@PathVariable Long startPos, @PathVariable Long endPos ) {
-        KrBankRequest krBankRequest = new KrBankRequest("","","","","","" ,"DD",startPos, endPos);
+    private ResponseEntity getData(@PathVariable String code, @PathVariable String option1, @PathVariable String startDate, @PathVariable String endDate, Pageable pageable) {
+//        KrBankRequest krBankRequest = new KrBankRequest("","","","","","" ,"DD",startPos, endPos);
+        Page<KrBankData> krBankDatas = ecosDataRepo.findByStatCodeAndItemCode1AndTimeBetween(code, option1, startDate, endDate, pageable);
+
         return ResponseEntity
             .ok()
-            .body(ecosApiServiceImpl.getDataFromAPI(krBankRequest));
+            .body(krBankDatas);
     }
 //    @GetMapping("/{date}")
 //    private  getTemplateById(@PathVariable date: String): ResponseEntity<Any> {
