@@ -67,3 +67,44 @@ services:
     ports:
       - "54000:54000"
 
+
+
+
+
+############## docker swarm for orchestration
+##  manager node for server #1
+#docker swarm init --advertise-addr 192.168.0.1   # my ip
+#
+## wocker node for server #2
+#docker swarm join --token qwerasdfzxcv----------token value
+#
+## docker-compose.yml for replica
+#
+#version: 3
+#
+#services:
+#  fn-service:
+#    image: fn-service
+#    deploy:
+#      replicas: 3       # 복제 수
+#      resources:        # 자원 사용
+#        limits:
+#          cpus: "0.1"   # 10%
+#          memory: 20M   # 20 MB
+#    restart_policy:
+#      condition: on-failure
+#      delay: 2s         # 실패시 대기 시간
+#      max_attempts: 3   # 재시도 횟수
+#    container_name: "fn-service" # container의 name을 정의합니다.
+#    networks:
+#      - service-network
+#    ports:
+#      - "54000:54000"
+#networks:
+#  service-network:
+
+# on manager server
+docker stack deploy -c docker-compose.yml fn-service
+
+docker service ls
+docker service ps fn-service
