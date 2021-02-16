@@ -3,7 +3,7 @@ FROM java:8
 LABEL maintainer="minssan9@gmail.com"
 
 # Add a volume to /tmp
-VOLUME /fn
+VOLUME /fn-service
 
 # Make port 8080 available to the world outside this container
 EXPOSE 54000
@@ -15,4 +15,4 @@ ARG JAR_FILE=build/libs/*.jar
 ADD ${JAR_FILE} app.jar
 
 # Run the jar file
-ENTRYPOINT ["java", "-Dspring.profiles.active=dev", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "/app.jar"]
