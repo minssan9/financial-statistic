@@ -1,17 +1,16 @@
 package com.service.service;
 
-import static com.service.ServiceApplication.dateFormatString;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import com.service.domain.KrBankData;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
 import com.service.dto.KrBankRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static com.service.ServiceApplication.dateFormatString;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class EcosApiServiceImplTest {
@@ -24,7 +23,7 @@ class EcosApiServiceImplTest {
 
     @Test
     void getKOSPI() {
-        String queryDate = "";
+        String queryDate = "20210210";
         List<KrBankData> krBankDatas = ecosApiService.batchData(
                 new KrBankRequest("064Y001", "0001000", "", "", queryDate, queryDate, "DD", 1L, 1000L)
         );
@@ -34,7 +33,7 @@ class EcosApiServiceImplTest {
 
     @Test
     void batchKOSDAQ() {
-        String queryDate = "";
+        String queryDate = "20210210";
         List<KrBankData> krBankDatas = ecosApiService.batchData(
                 new KrBankRequest("064Y001", "0001000", "", "", queryDate, queryDate, "DD", 1L, 1000L)
         );

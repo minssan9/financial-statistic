@@ -24,8 +24,6 @@ public class KrBankScheduler {
 		String nowTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
 
 		ecosApiService.saveDataEachSchema(nowDate, nowDate);
-		ecosApiService.batchKOSPI(nowDate);
-		ecosApiService.batchKOSDAQ(nowDate);
 	}
 
 	@Scheduled(fixedDelay = 1000)
