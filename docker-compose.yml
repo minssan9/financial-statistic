@@ -66,7 +66,12 @@ services:
     container_name: "fn-service" # container의 name을 정의합니다.
     ports:
       - "54000:54000"
+  vuejs:
+    image: docker/dockerfile
 
+#  xcopy dist\*.* c:nginx\html\ /e /h /k
+# command ( -f dockerfile -t creating image name
+# docker build -f Dockerfile-prod -t docker-react-ngnix
 
 
 
