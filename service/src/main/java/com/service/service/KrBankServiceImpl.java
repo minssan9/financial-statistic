@@ -1,20 +1,19 @@
 package com.service.service;
 
-import com.service.config.AppProperties;
+//import com.service.config.AppProperties;
 import com.service.domain.KrBankData;
 import com.service.domain.KrBankSchema;
 import com.service.dto.KrBankRequest;
 import com.service.repository.EcosDataRepo;
 import com.service.repository.EcosSchemaRepo;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 @Service
 class KrBankServiceImpl implements KrBankService {
-    @Autowired
-    private AppProperties appProperties;
+//    @Autowired
+//    private AppProperties appProperties;
 
     @Autowired
     EcosDataRepo ecosDataRepo;

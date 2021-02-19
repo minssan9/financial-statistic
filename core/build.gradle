@@ -1,10 +1,10 @@
 plugins {
     id 'org.springframework.boot'
-
 }
-
-group = 'com.voyagerss'
-version = '0.1.0'
+ext {
+    queryDslVersion = '4.2.1'
+    lombokVersion = '1.18.10'
+}
 
 repositories {
     mavenCentral()
@@ -12,10 +12,9 @@ repositories {
 
 bootJar{
     enabled=false
+    archiveVersion = '0.0.1-SNAPSHOT'
+    archiveExtension = 'jar'
 }
 jar{
     enabled=true
-}
-
-dependencies {
 }

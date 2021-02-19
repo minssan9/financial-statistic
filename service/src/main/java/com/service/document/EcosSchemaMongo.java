@@ -1,5 +1,6 @@
-package com.service.domain;
+package com.service.document;
 
+import com.service.domain.KrBankSchema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;

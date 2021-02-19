@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.binding.QuerydslBindingsFactory;
 
 import java.util.List;
 
@@ -16,13 +17,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class EcosDataRepoTest {
 
     EcosDataRepo ecosDataRepo;
-
     @Test
     void findByStat_codeAndItem_code1AndTimeBetween() {
-
-        Page<KrBankData> krBankDatas = ecosDataRepo.findByStatCodeAndItemCode1AndTimeBetween(
-                "064Y001", "0001000", "20210128", "20210128",  PageRequest.of(1,10 )
-        );
+//        Page<KrBankData> krBankDatas = ecosDataRepo.(
+//                "064Y001", "0001000", "20210128", "20210128",  PageRequest.of(1,10 )
+//        )
 
     }
 }

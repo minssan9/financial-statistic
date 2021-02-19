@@ -2,8 +2,6 @@ plugins {
     id 'org.springframework.boot'
 }
 
-group = 'com.voyagerss'
-version = '0.1.0'
 
 repositories {
     mavenCentral()

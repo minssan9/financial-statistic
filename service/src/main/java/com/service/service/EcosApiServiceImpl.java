@@ -2,8 +2,8 @@ package com.service.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.config.AppProperties;
-import com.service.domain.EcosDataMongo;
-import com.service.domain.EcosSchemaMongo;
+import com.service.document.EcosDataMongo;
+import com.service.document.EcosSchemaMongo;
 import com.service.domain.KrBankData;
 import com.service.domain.KrBankSchema;
 import com.service.dto.KrBankDataResponse;
