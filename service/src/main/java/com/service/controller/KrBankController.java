@@ -1,9 +1,7 @@
 package com.service.controller;
 
-import com.service.domain.EcosSchemaMongo;
 import com.service.domain.KrBankData;
 import com.service.domain.KrBankSchema;
-import com.service.dto.KrBankRequest;
 import com.service.repository.EcosDataRepo;
 import com.service.repository.EcosSchemaRepo;
 import com.service.service.KrBankService;
@@ -14,7 +12,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,7 +1,6 @@
 package com.service.mongorepo;
 
-import com.service.domain.EcosDataMongo;
-import com.service.domain.KrBankData;
+import com.service.document.EcosDataMongo;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

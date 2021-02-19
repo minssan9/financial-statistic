@@ -1,25 +1,12 @@
 plugins {
 	id 'org.springframework.boot'
 }
-
-group = 'com.voyagerss'
-version = '0.1.0'
-archivesBaseName = 'service'
-
-repositories {
-	mavenCentral()
-}
-
-
 bootJar {
 	manifest {
-		attributes 'Start-Class': 'com.service.ServerApplication'
+		attributes 'Start-Class': 'com.service.ServiceApplication'
 	}
 }
 dependencies {
-	compile project(':core')
+//	compile project(':core')
 }
 
-test {
-	useJUnitPlatform()
-}

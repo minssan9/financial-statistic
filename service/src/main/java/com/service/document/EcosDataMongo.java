@@ -1,7 +1,8 @@
-package com.service.domain;
+package com.service.document;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.service.domain.KrBankData;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
