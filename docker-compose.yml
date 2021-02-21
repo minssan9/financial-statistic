@@ -1,0 +1,115 @@
+#version: "3.2"      # version 정보를 작성합니다.
+#services:           # service 목록을 정의합니다.
+#  nginx:
+#    image: nginx    # nginx for vuejs
+#    restart: always # container를 실행할 때 항상 이미 수행중이라면 재시작을 수행합니다.
+#    #    environment: # 환경변수를 정의합니다.
+#    volumes: # container -> local로 mount할 수 있습니다.
+#      - ./nginx/conf.d:/etc/nginx/conf.d
+#    container_name: "nginx" # container의 name을 정의합니다.
+#    ports: # service port를 정의합니다.
+#      - 80:80
+##    depends_on:
+##      - test_application
+
+version: "3.2"
+services:
+  nginx:
+    image: nginx    # nginx for vuejs
+    restart: always
+#    environment: # 환경변수를 정의합니다.
+    volumes: # container -> local로 mount할 수 있습니다.
+      - type: bind
+        source: ./nginx/conf.d
+        target: /etc/nginx/conf.d
+    container_name: "nginx"
+    ports:
+      - 80:80
+#    depends_on:
+#      - test_application
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:        # container -> local로 mount할 수 있습니다.
+      - type: bind
+        source: ./data/mongo
+        target: /data/mongo
+    container_name: "mongodb"
+    ports:
+      - "27017:27017"     # local:container
+
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_INITDB_ROOT_USERNAME: root
+      MYSQL_INITDB_ROOT_PASSWORD: 123456
+    volumes:        # container -> local로 mount할 수 있습니다.
+      - type: bind
+        source: ./data/mysql
+        target: /data/mysql
+    container_name: "mysql"
+    ports:
+      - "3306:3306"
+  fn-service:
+    image: fn-service
+    restart: always
+    environment:
+      MYSQL_INITDB_ROOT_USERNAME:
+    volumes:        # container -> local로 mount할 수 있습니다.
+      - type: bind
+        source: ./logs
+        target: /logs
+    container_name: "fn-service" # container의 name을 정의합니다.
+    ports:
+      - "54000:54000"
+  vuejs:
+    image: docker/dockerfile
+
+#  xcopy dist\*.* c:nginx\html\ /e /h /k
+# command ( -f dockerfile -t creating image name
+# docker build -f Dockerfile-prod -t docker-react-ngnix
+
+
+
+
+############## docker swarm for orchestration
+##  manager node for server #1
+#docker swarm init --advertise-addr 192.168.0.1   # my ip
+#
+## wocker node for server #2
+#docker swarm join --token qwerasdfzxcv----------token value
+#
+## docker-compose.yml for replica
+#
+#version: 3
+#
+#services:
+#  fn-service:
+#    image: fn-service
+#    deploy:
+#      replicas: 3       # 복제 수
+#      resources:        # 자원 사용
+#        limits:
+#          cpus: "0.1"   # 10%
+#          memory: 20M   # 20 MB
+#    restart_policy:
+#      condition: on-failure
+#      delay: 2s         # 실패시 대기 시간
+#      max_attempts: 3   # 재시도 횟수
+#    container_name: "fn-service" # container의 name을 정의합니다.
+#    networks:
+#      - service-network
+#    ports:
+#      - "54000:54000"
+#networks:
+#  service-network:
+
+# on manager server
+docker stack deploy -c docker-compose.yml fn-service
+
+docker service ls
+docker service ps fn-service

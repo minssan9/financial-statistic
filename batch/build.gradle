@@ -1,0 +1,22 @@
+plugins {
+    id 'org.springframework.boot'
+    id "io.spring.dependency-management"
+}
+
+bootJar {
+    manifest {
+        attributes 'Start-Class': 'com.batch.BatchApplication'
+    }
+}
+dependencies {
+    implementation project(':core')
+    implementation project(':service')
+
+    compile 'org.springframework.boot:spring-boot-starter-batch'
+
+    testCompile('org.springframework.batch:spring-batch-test')
+}
+
+test {
+    useJUnitPlatform()
+}
