@@ -1,14 +1,10 @@
 plugins {
     id 'org.springframework.boot'
-}
-ext {
-    queryDslVersion = '4.2.1'
-    lombokVersion = '1.18.10'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
-repositories {
-    mavenCentral()
-}
+group 'com.minssan9.core'
+version '1.0'
 
 bootJar{
     enabled=false
@@ -17,4 +13,39 @@ bootJar{
 }
 jar{
     enabled=true
+}
+
+
+
+dependencies {
+    runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.2'
+
+
+//    compile('org.eclipse.persistence:javax.persistence:2.1.0')
+    compile("com.querydsl:querydsl-core:${queryDslVersion}")
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.querydsl:querydsl-apt'
+
+//    annotationProcessor 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+
+}
+
+def querydslGenratedSrc = "$buildDir/generated/queryDsl"
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslGenratedSrc
+}
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+sourceSets {
+    main.java.srcDirs querydslGenratedSrc
+}
+clean.doLast {
+    file(querydslGenratedSrc).deleteDir()
 }

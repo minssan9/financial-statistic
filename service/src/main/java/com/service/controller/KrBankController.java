@@ -1,10 +1,10 @@
 package com.service.controller;
 
-import com.service.domain.KrBankData;
-import com.service.domain.KrBankSchema;
-import com.service.repository.EcosDataRepo;
-import com.service.repository.EcosSchemaRepo;
-import com.service.service.KrBankService;
+import com.core.domain.KrBankData;
+import com.core.domain.KrBankSchema;
+import com.core.repo.EcosDataRepo;
+import com.core.repo.EcosSchemaRepo;
+import com.service.service.EcosService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("fn")
 class KrBankController {
     @Autowired
-    private KrBankService krBankService;
+    private EcosService ecosService;
 
     @Autowired
     private EcosSchemaRepo ecosSchemaRepo;

@@ -1,21 +1,16 @@
 plugins {
     id 'org.springframework.boot'
+    id "io.spring.dependency-management"
 }
-
-
-repositories {
-    mavenCentral()
-}
-
 
 bootJar {
     manifest {
-        attributes 'Start-Class': 'com.service.BatchApplication'
+        attributes 'Start-Class': 'com.batch.BatchApplication'
     }
 }
 dependencies {
-    compile project(':core')
-    compile project(':service')
+    implementation project(':core')
+    implementation project(':service')
 
     compile 'org.springframework.boot:spring-boot-starter-batch'
 

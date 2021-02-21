@@ -16,6 +16,11 @@ public class EcosJobScheduler {
     private final JobLauncher jobLauncher;
     private final EcosJobConfiguration ecosJobConfiguration;
 
+
+    @Scheduled(cron = "0 0 20 * * ?")
+    public void saveBalance08JobSch() {
+
+    }
     @Scheduled(cron = "0 0 13 * * *", zone = "Asia/Seoul")
     public void runJob() {
         log.info("sampleJob start");

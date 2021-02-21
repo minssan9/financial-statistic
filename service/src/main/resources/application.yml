@@ -28,10 +28,12 @@ spring:
       authentication-database: admin
       username: fn
       password: dugodwk1
-  mvc:
-      throw-exception-if-no-handler-found: true
-  resources:
-      add-mappings: false
+  batch:
+    job:
+      enabled: true
+      names: ${job.name:NONE}
+    initialize-schema: never
+
 
 #OAuth2
 encodeKey: secret

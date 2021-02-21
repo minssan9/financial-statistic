@@ -1,13 +1,13 @@
 package com.service;
 
-import com.service.config.AppProperties;
-import com.service.service.EcosApiService;
+import com.service.properties.ServiceProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -22,8 +22,9 @@ import java.time.format.DateTimeFormatter;
 @SpringBootApplication
 @Configuration
 @EnableAspectJAutoProxy
-@EnableMongoRepositories(basePackages = "com.service.mongorepo")
-@EnableJpaRepositories(basePackages = {"com.service.repository"})
+@EnableMongoRepositories(basePackages = "com.core.mongorepo")
+@EnableJpaRepositories(basePackages = {"com.core.repo"})
+@EntityScan(basePackages = "com.core.domain")
 @ComponentScan(basePackages = {  "com.core", "com.service"})
 @CrossOrigin(origins = {"*", "http://localhost"})
 @Slf4j
@@ -37,10 +38,7 @@ public class ServiceApplication implements ApplicationRunner {
     public static String ECOS_API_KEY ;
 
     @Autowired
-    EcosApiService ecosApiService;
-
-    @Autowired
-    AppProperties appProperties;
+    ServiceProperties serviceProperties;
 
 
     public static void main(String[] args) {
@@ -49,7 +47,7 @@ public class ServiceApplication implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        ECOS_API_KEY = appProperties.getEcosApiKey();
+        ECOS_API_KEY = serviceProperties.getEcosApiKey();
 
         LocalDateTime oldDateTime = LocalDateTime.now().minusDays(150);
         String todayString = LocalDateTime.now().minusDays(2L).format(dateFormatString);

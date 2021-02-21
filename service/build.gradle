@@ -1,12 +1,22 @@
 plugins {
-	id 'org.springframework.boot'
 }
+
+ext {
+	hikaricpVersion = '3.4.1'
+	projectGroup = 'com.minssan9'
+	projectVersion = '0.0.1-'+new Date().format('yyyyMMddHHmmss')
+}
+
 bootJar {
 	manifest {
 		attributes 'Start-Class': 'com.service.ServiceApplication'
 	}
 }
 dependencies {
-//	compile project(':core')
-}
+	compile project($/:core/$)
 
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+//        implementation 'org.springframework.boot:spring-boot-starter-security'
+
+}

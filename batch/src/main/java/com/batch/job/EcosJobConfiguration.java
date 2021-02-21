@@ -1,6 +1,8 @@
 package com.batch.job;
 
 import com.batch.tasklet.EcosJobStep2Tasklet;
+import com.core.api.EcosApiService;
+import com.core.api.EcosApiServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.ExitStatus;
@@ -13,6 +15,9 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -47,6 +52,11 @@ public class EcosJobConfiguration {
                     log.info("sampleStep1 start : {}", str);
 
                     // step1 logic
+                    EcosApiService ecosApiService = new EcosApiServiceImpl();
+                    String nowDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+                    String nowTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
+
+                    ecosApiService.saveDataEachSchema(nowDate, nowDate);
 
 
                     if(false){

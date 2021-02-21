@@ -1,82 +1,52 @@
-import java.sql.Wrapper
-
-buildscript {
-    ext {
-        springBootVersion = '2.4.2'
-        querydslPluginVersion = '1.0.10'
-    }
-    repositories {
-        mavenCentral()
-        jcenter()
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
-
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE"
-        classpath "gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:${querydslPluginVersion}"
-    }
+plugins {
+    id "java"
+    id 'org.springframework.boot' version '2.4.2'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 }
-ext{
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://plugins.gradle.org/m2/" }
+}
+
+ext {
     projectGroup = 'com.minssan9'
+    lombokVersion = '1.18.18'
+    springBootVersion = '2.4.2'
     queryDslVersion = '4.2.1'
-    lombokVersion = '1.18.10'
-    projectVersion = '0.0.1-'+new Date().format('yyyyMMddHHmmss')
+    flywayVersion = '6.0.8'
+    hikaricpVersion = '3.4.1'
+    lettuceCoreVersion = '5.2.1'
+    guavaVersion = '28.1'
+    commonsPool2Version = '2.7.0'
+    commonsLangVersion = '3.9'
+    projectVersion = '0.0.1-' + new Date().format('yyyyMMddHHmmss')
 }
-
 
 allprojects {
-    group = "${projectGroup}"
-    version = "${projectVersion}"
-    repositories {
-        mavenCentral()
-    }
-}
-
-subprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
-    apply plugin: "com.ewerk.gradle.plugins.querydsl"
-
+    apply plugin: 'idea'
     sourceCompatibility = 1.8
 
+    group 'com.minssan9'
+    version '1.0'
 
     configurations {
-//        developmentOnly
-//        runtimeClasspath {
-//            extendsFrom developmentOnly
-//        }
-//        compileOnly {
-//            extendsFrom annotationProcessor
-//        }
-        querydsl.extendsFrom compileClasspath
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
     }
 
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        implementation 'org.springframework.boot:spring-boot-starter-aop'
-//        implementation 'org.springframework.boot:spring-boot-starter-security'
+        compile 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springdoc:springdoc-openapi-ui:1.5.3'
-
-        implementation 'com.google.code.gson:gson'
-
-        implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.2'
-        compile('org.eclipse.persistence:javax.persistence:2.1.0')
-
-//        implementation 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
-        compile("com.querydsl:querydsl-core:${queryDslVersion}")
-        compile("com.querydsl:querydsl-jpa:${queryDslVersion}")
-        compile("com.querydsl:querydsl-apt:${queryDslVersion}")
-        annotationProcessor 'org.springframework.boot:spring-boot-starter-data-jpa'
-        annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
-
-        runtimeOnly 'mysql:mysql-connector-java'
-
-        implementation 'org.slf4j:slf4j-api:1.7.25'
-        implementation 'junit:junit:4.11'
 
         compileOnly "org.projectlombok:lombok:${lombokVersion}"
         annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -86,34 +56,45 @@ subprojects {
         testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
         testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
 
+        implementation 'org.slf4j:slf4j-api:1.7.25'
+        testImplementation 'junit:junit:4.11'
 
-        testImplementation('org.springframework.boot:spring-boot-starter-test')
+        implementation 'com.google.code.gson:gson'
+
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    }
-
-
-    def querydslGenratedSrc = 'src/main/generated'
-    querydsl {
-        library = "com.querydsl:querydsl-apt"
-        jpa = true
-        querydslSourcesDir = querydslGenratedSrc
-    }
-    compileQuerydsl{
-        options.annotationProcessorPath = configurations.querydsl
-    }
-    sourceSets {
-        main.java.srcDirs += [ querydslGenratedSrc ]
-    }
-    tasks.withType(JavaCompile) {
-        options.annotationProcessorGeneratedSourcesDirectory = file(querydslGenratedSrc)
-    }
-
-    clean.doLast {
-        file(querydslGenratedSrc).deleteDir()
     }
     test {
         useJUnitPlatform()
     }
 
 }
+
+subprojects {
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
+        implementation 'org.springdoc:springdoc-openapi-ui:1.5.3'
+
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    }
+    test {
+        useJUnitPlatform()
+    }
+}
+
+//configurations {
+//    querydsl.extendsFrom compileClasspath
+//}
+
+project(':core') {
+    bootJar.enabled = false
+    jar.enabled = true
+}
+project(':batch') {
+    bootJar.enabled = true
+    jar.enabled = true
+}
+project(':service') {
+    bootJar.enabled = true
+    jar.enabled = true
+}
+

@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableBatchProcessing
 @EnableScheduling
 @EnableJpaRepositories(basePackages = {"com.service.repository"})
-@EntityScan(basePackages = {"com.service.domain"})
+@EntityScan(basePackages = {"com.core.domain"})
 @SpringBootApplication
 public class BatchApplication {
 
