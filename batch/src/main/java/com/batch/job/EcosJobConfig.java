@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 @RequiredArgsConstructor
 @Configuration
-public class EcosJobConfiguration {
+public class EcosJobConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
@@ -56,7 +56,7 @@ public class EcosJobConfiguration {
                     String nowDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
                     String nowTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss"));
 
-                    ecosApiService.saveDataEachSchema(nowDate, nowDate);
+                    ecosApiService.retrieveDataEachSchema(nowDate, nowDate);
 
 
                     if(false){

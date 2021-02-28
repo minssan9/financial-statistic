@@ -1,39 +1,46 @@
 plugins {
-    id 'org.springframework.boot'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
+
 group 'com.minssan9.core'
 version '1.0'
+sourceCompatibility = 1.8
 
-bootJar{
-    enabled=false
-    archiveVersion = '0.0.1-SNAPSHOT'
-    archiveExtension = 'jar'
+
+ext {
+    projectGroup = 'com.minssan9'
+    lombokVersion = '1.18.18'
+    springBootVersion = '2.4.2'
+    queryDslVersion = '4.2.1'
 }
-jar{
-    enabled=true
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://plugins.gradle.org/m2/" }
 }
-
-
+bootJar { enabled = false }
+jar { enabled = true }
 
 dependencies {
-    runtimeOnly 'mysql:mysql-connector-java'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    compile 'mysql:mysql-connector-java'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.2'
 
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
 //    compile('org.eclipse.persistence:javax.persistence:2.1.0')
     compile("com.querydsl:querydsl-core:${queryDslVersion}")
     implementation 'com.querydsl:querydsl-jpa'
     implementation 'com.querydsl:querydsl-apt'
 
-//    annotationProcessor 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
-
 }
 
 def querydslGenratedSrc = "$buildDir/generated/queryDsl"
 querydsl {
+    library = "com.querydsl:querydsl-apt"
     jpa = true
     querydslSourcesDir = querydslGenratedSrc
 }

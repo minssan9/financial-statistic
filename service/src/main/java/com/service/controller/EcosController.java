@@ -1,10 +1,10 @@
 package com.service.controller;
 
-import com.core.domain.KrBankData;
-import com.core.domain.KrBankSchema;
+import com.core.domain.EcosData;
+import com.core.domain.EcosSchema;
 import com.core.repo.EcosDataRepo;
 import com.core.repo.EcosSchemaRepo;
-import com.service.service.EcosService;
+import com.core.service.EcosService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "ecos data source example", description = "This controller is for the test")
 @RestController("fn")
-class KrBankController {
+class EcosController {
     @Autowired
     private EcosService ecosService;
 
@@ -34,7 +34,7 @@ class KrBankController {
     @GetMapping("schema/list")
     private ResponseEntity getSchema(Pageable pageable  ) {
 
-        Page<KrBankSchema> krBankSchemas = ecosSchemaRepo.findAll(pageable);
+        Page<EcosSchema> krBankSchemas = ecosSchemaRepo.findAll(pageable);
         return ResponseEntity
                 .ok()
             .body(krBankSchemas );
@@ -46,7 +46,7 @@ class KrBankController {
             @ApiResponse(responseCode = "200",
                 description = "User's information",
                 content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = KrBankData.class))),
+                    schema = @Schema(implementation = EcosData.class))),
             @ApiResponse(responseCode = "404", description = "ecos not found",
                 content = @Content(schema = @Schema(format = "")))
         }
@@ -54,7 +54,7 @@ class KrBankController {
     @GetMapping("data/{code}/{option1}/{startDate}/{endDate}")
     private ResponseEntity getData(@PathVariable String code, @PathVariable String option1, @PathVariable String startDate, @PathVariable String endDate, Pageable pageable) {
 //        KrBankRequest krBankRequest = new KrBankRequest("","","","","","" ,"DD",startPos, endPos);
-        Page<KrBankData> krBankDatas = ecosDataRepo.findByStatCodeAndItemCode1AndTimeBetween(code, option1, startDate, endDate, pageable);
+        Page<EcosData> krBankDatas = ecosDataRepo.findByStatCodeAndItemCode1AndTimeBetween(code, option1, startDate, endDate, pageable);
 
         return ResponseEntity
             .ok()
