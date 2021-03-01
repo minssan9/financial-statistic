@@ -61,7 +61,6 @@ public class EcosApiServiceImpl implements EcosApiService {
         KrBankRequest krBankRequest = new KrBankRequest();
         krBankRequest.setServiceName("StatisticTableList");
 
-
         ResponseEntity<String> response = restTemplate.getForEntity(getUrlString(krBankRequest), String.class);
         List<EcosSchema> ecosSchemas = gson.fromJson(response.getBody(), KrBankSchemaResponse.class).getStatisticTableList().getKrBankSchema();
 
