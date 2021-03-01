@@ -5,38 +5,45 @@ server:
 application:
   name: financial-statistics-batch
 
-
 spring:
-  profiles:
-    active: local
-    include: core
-  batch:
-    job:
+  devtools:
+    livereload:
       enabled: true
-      names: ${job.name:NONE}
-    initialize-schema: never
-  main:
-    web-application-type: NONE
+  mvc:
+    throw-exception-if-no-handler-found: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://shop.voyagerss.com:3306/charger?characterEncoding=utf8&serverTimezone=UTC&useUnicode=true&createDatabaseIfNotExist=true
-    username: charger
-    password: wjsrlck1@
+    url: jdbc:mysql://shop.voyagerss.com:3306/fn_statistic?characterEncoding=utf8&serverTimezone=UTC&useUnicode=true&createDatabaseIfNotExist=true
+    username: fn
+    password: dugodwk1
     jpa:
       show-sql: false
       generate-ddl: true
       hibernate:
-        ddl-auto: none
+        ddl-auto: update
         naming_strategy: org.hibernate.cfg.DefaultNamingStrategy
       properties:
         hibernate:
           format_sql: true
           dialect: org.hibernate.dialect.MySQL8Dialect
     #        database-platform: org.hibernate.dialect.MySQL8Dialect
-    data:
-      mongodb:
-        host: mongodb://fn:dugodwk1@shop.voyagerss.com/fn?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000
-        database: fn
-        authentication-database: admin
-        username: fn
-        password: dugodwk1
+  data:
+    mongodb:
+      host: mongodb://fn:dugodwk1@shop.voyagerss.com/fn?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000
+      database: fn
+      authentication-database: admin
+      username: fn
+      password: dugodwk1
+#  batch:
+#    job:
+#      enabled: true
+#      names: ${job.name:NONE}
+#    initialize-schema: never
+---
+spring:
+  profiles:
+    active: beta
+    include: core
+
+#app:
+ecos-api-key: A3KS6JOGXDYWDBC2XQ3Y
