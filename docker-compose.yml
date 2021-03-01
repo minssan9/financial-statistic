@@ -14,14 +14,31 @@
 
 version: "3.2"
 services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    restart: always
+    volumes: # container -> local로 mount할 수 있습니다.
+      - ./etc/jenkins:/var/jenkins_home
+      - ./var/run/docker.sock:/var/run/docker.sock
+    container_name: "jenkins"
+    ports:
+      - '8080:8080'
+      - '50000:50000'
+    expose:
+      - '8080'
+      - '50000'
+    environment:
+      TZ: "Asia/Seoul"
+    networks:
+      default:
+        external:
+          name: devops
   nginx:
     image: nginx    # nginx for vuejs
     restart: always
 #    environment: # 환경변수를 정의합니다.
     volumes: # container -> local로 mount할 수 있습니다.
-      - type: bind
-        source: ./nginx/conf.d
-        target: /etc/nginx/conf.d
+      - ./nginx/conf.d:/etc/nginx/conf.d
     container_name: "nginx"
     ports:
       - 80:80
