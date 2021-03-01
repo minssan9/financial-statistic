@@ -1,50 +1,66 @@
 plugins {
+    id "java"
     id 'org.springframework.boot' version '2.4.2'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 }
 
-group  'com.minssan9'
+bootJar.enabled = false
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://plugins.gradle.org/m2/" }
+}
+
+ext {
+    projectGroup = 'com.minssan9'
+    lombokVersion = '1.18.18'
+    springBootVersion = '2.4.2'
+    queryDslVersion = '4.2.1'
+    hibernateVersion = '5.4.5.Final'
+    projectVersion = '0.0.1-' + new Date().format('yyyyMMddHHmmss')
+}
 
 allprojects {
-
-
-}
-
-subprojects {
-    repositories {
-        mavenCentral()
-    }
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
 
-    sourceCompatibility = 11
+    group 'com.minssan9'
+    version '1.0'
+    sourceCompatibility = 1.8
+    configurations { compileOnly { extendsFrom annotationProcessor } }
 
     dependencies {
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+        implementation("org.projectlombok:lombok:${lombokVersion}")
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-webflux'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'io.projectreactor:reactor-test'
+
         implementation 'org.springframework.boot:spring-boot-starter-aop'
-        implementation 'org.springframework.boot:spring-boot-starter-security'
-        compile 'org.springframework.boot:spring-boot-starter-web'
-
-        implementation 'org.springdoc:springdoc-openapi-ui:1.5.3'
-
-        implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.2'
-        implementation 'com.google.code.gson:gson'
-
-        runtimeOnly 'mysql:mysql-connector-java'
-        implementation 'com.zaxxer:HikariCP'
 
         implementation 'org.slf4j:slf4j-api:1.7.25'
-
-
-        compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
+        implementation 'com.google.code.gson:gson'
 
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        testImplementation 'junit:junit:4.12'
     }
 
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
 
     test {
+        exclude '**/*'
         useJUnitPlatform()
     }
+
 }
+
+

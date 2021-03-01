@@ -1,31 +1,19 @@
 application:
-    name: charger
+  name: fn
 
 server:
-    port: 53000
+  port: 53000
 
-    #Mongo
+  #Mongo
 spring:
-    profiles:
-        active: local
-    #  include: core
-    devtools:
-        livereload:
-            enabled: true
-springdoc:
-    version: '1.0.0'
-    api-docs:
-        groups:
-            enabled: true
-    default-consumes-media-type: application/json
-    default-produces-media-type: application/json
-    swagger-ui:
-        operations-sorter: alpha
-        tags-sorter: alpha
-        path: /swagger-ui.html
-        disable-swagger-default-url: true
-        display-query-params-without-oauth2: true
-    paths-to-match: /**
+  profiles:
+    active: local
+  #  include: core
+  devtools:
+    livereload:
+      enabled: true
+  mvc:
+    throw-exception-if-no-handler-found: true
 
-#bitcoin
-url.bitcoin.price: https://api.coindesk.com/v1/bpi/currentprice/BTC.json
+#app:
+ecos-api-key: A3KS6JOGXDYWDBC2XQ3Y

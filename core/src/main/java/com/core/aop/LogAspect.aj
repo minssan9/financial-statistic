@@ -23,7 +23,7 @@ public class LogAspect {
 
     //    @Around("@annotation(LogExecutionTime)")
 //    @Around("pointcutMethod()")
-    @Around("execution(* com.mk.charger.station.Controller.*(..))")
+    @Around("execution(* com.service.controller.*(..))")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
         StopWatch stopWatch = new StopWatch();
@@ -40,7 +40,7 @@ public class LogAspect {
         return proceed;
     }
 
-    @After("execution(* com.mk.charger.station.Repository.*(..))")
+    @After("execution(* com.core.service.*(..))")
     public void logServiceAccess(JoinPoint joinPoint) {
 
         String result = "";
