@@ -1,17 +1,14 @@
 package com.core.document;
 
-import com.core.domain.KrBankSchema;
-import lombok.Data;
+import com.core.domain.EcosSchema;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 @NoArgsConstructor
 @Document
-@Data
 public class EcosMongoSchema {
         @Id @GeneratedValue
         ObjectId _id;
@@ -30,12 +27,12 @@ public class EcosMongoSchema {
 //        검색가능여부	SRCH_YN	1	Y/N	검색가능여부
 //        출처	ORG_NAME	50	국제통화기금(IMF)	출처
 
-        public EcosMongoSchema(KrBankSchema krBankSchema){
-                this.pstatcode = krBankSchema.getPstatcode();
-                this.statcode = krBankSchema.getStatcode();
-                this.statname = krBankSchema.getStatname();
-                this.cycle = krBankSchema.getCycle();
-                this.orgname = krBankSchema.getOrgname();
-                this.srchyn = krBankSchema.getSearchFlag();
+        public EcosMongoSchema(EcosSchema ecosSchema){
+                this.pstatcode = ecosSchema.getPstatcode();
+                this.statcode = ecosSchema.getStatcode();
+                this.statname = ecosSchema.getStatname();
+                this.cycle = ecosSchema.getCycle();
+                this.orgname = ecosSchema.getOrgname();
+                this.srchyn = ecosSchema.getSearchFlag();
         }
 }

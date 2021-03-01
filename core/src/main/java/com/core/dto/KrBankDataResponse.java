@@ -1,6 +1,6 @@
 package com.core.dto;
 
-import com.core.domain.KrBankData;
+import com.core.domain.EcosData;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -23,7 +23,7 @@ public class KrBankDataResponse implements Serializable {
         public int listTotalCount;
         @SerializedName("row")
         @Expose
-        public List<KrBankData> row = null;
+        public List<EcosData> row = null;
     }
 }
 

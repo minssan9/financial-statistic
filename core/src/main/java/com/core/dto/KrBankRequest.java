@@ -1,6 +1,6 @@
 package com.core.dto;
 
-import com.core.domain.KrBankSchema;
+import com.core.domain.EcosSchema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -38,9 +38,9 @@ public class KrBankRequest {
         this.reqEndCount = reqEndCount;
     }
 
-    public KrBankRequest(KrBankSchema krBankSchema) {
-        this.statisticCode = krBankSchema.getPstatcode();
-        this.option1 = krBankSchema.getStatcode();
+    public KrBankRequest(EcosSchema ecosSchema) {
+        this.statisticCode = ecosSchema.getPstatcode();
+        this.option1 = ecosSchema.getStatcode();
         this.reqStartCount = 1L;
         this.reqEndCount = 1000L;
     }

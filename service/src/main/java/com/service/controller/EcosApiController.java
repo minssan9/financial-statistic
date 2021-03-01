@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("krbankapi")
-class KrBankApiController {
+class EcosApiController {
     @Autowired
     private EcosApiService ecosApiService;
 

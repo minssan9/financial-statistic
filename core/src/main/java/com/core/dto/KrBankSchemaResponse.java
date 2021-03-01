@@ -1,6 +1,6 @@
 package com.core.dto;
 
-import com.core.domain.KrBankSchema;
+import com.core.domain.EcosSchema;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
@@ -17,9 +17,9 @@ public class KrBankSchemaResponse {
         @SerializedName("list_total_count")
         int list_total_count;
         @SerializedName("row")
-        List<KrBankSchema> row;
+        List<EcosSchema> row;
 
-        public List<KrBankSchema> getKrBankSchema() {
+        public List<EcosSchema> getKrBankSchema() {
             return row;
         }
     }
