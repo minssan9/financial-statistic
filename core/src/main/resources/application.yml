@@ -1,19 +1,6 @@
-application:
-  name: fn
 
-server:
-  port: 53000
-
-  #Mongo
 spring:
   profiles:
-    active: local
-  #  include: core
-  devtools:
-    livereload:
-      enabled: true
-  mvc:
-    throw-exception-if-no-handler-found: true
-
-#app:
-ecos-api-key: A3KS6JOGXDYWDBC2XQ3Y
+    active: core
+server:
+  port: 53000

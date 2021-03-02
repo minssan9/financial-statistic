@@ -1,26 +1,22 @@
-# For local phase configurations
-application:
-  name: financial-statistics-service
-server:
-  port: 54000
-
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://shop.voyagerss.com:3306/fn_statistic?characterEncoding=utf8&serverTimezone=UTC&useUnicode=true&createDatabaseIfNotExist=true
-    username: fn
-    password: dugodwk1
-    jpa:
-      show-sql: false
-      generate-ddl: true
-      hibernate:
-        ddl-auto: none
-        naming_strategy: org.hibernate.cfg.DefaultNamingStrategy
-      properties:
-        hibernate:
-          format_sql: true
-          dialect: org.hibernate.dialect.MySQL8Dialect
-    #        database-platform: org.hibernate.dialect.MySQL8Dialect
+  profiles:
+    include: core
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://shop.voyagerss.com:3306/fn_statistic?characterEncoding=utf8&serverTimezone=UTC&useUnicode=true&createDatabaseIfNotExist=true
+#    username: fn
+#    password: dugodwk1
+  jpa:
+    show-sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+      naming_strategy: org.hibernate.cfg.DefaultNamingStrategy
+#    properties:
+#      hibernate:
+#        format_sql: true
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+  #        database-platform: org.hibernate.dialect.MySQL8Dialect
   data:
     mongodb:
       host: mongodb://fn:dugodwk1@shop.voyagerss.com/fn?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000
@@ -28,6 +24,16 @@ spring:
       authentication-database: admin
       username: fn
       password: dugodwk1
+
+mysql:
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://shop.voyagerss.com:3306/fn_statistic?characterEncoding=utf8&serverTimezone=UTC&useUnicode=true&createDatabaseIfNotExist=true
+  username: fn
+  password: dugodwk1
+
+
+server:
+  port: 44000
 
 springdoc:
   version: '1.0.0'
@@ -61,19 +67,19 @@ file:
 
 
 
----
-spring:
-  config:
-    activate:
-      on-profile: local
-
-
----
-spring:
-  config:
-    activate:
-      on-profile: dev
-  datasource:
-    hibernate:
-      ddl-auto: update
-
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: local
+#
+#
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: dev
+#  datasource:
+#    hibernate:
+#      ddl-auto: update
+#

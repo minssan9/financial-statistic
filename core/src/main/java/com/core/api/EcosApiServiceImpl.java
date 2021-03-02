@@ -76,6 +76,7 @@ public class EcosApiServiceImpl implements EcosApiService {
     public List<EcosSchema> retrieveDataEachSchema(String startDate, String endDate) {
         List<EcosSchema> ecosSchemas = ecosSchemaRepo.findAll();
         ecosSchemas.stream().map(i -> {
+
             KrBankRequest krBankRequest = new KrBankRequest(i);
             krBankRequest.setQueryStartDate(startDate);
             krBankRequest.setQueryEndDate(endDate);
