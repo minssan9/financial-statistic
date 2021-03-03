@@ -35,6 +35,12 @@ mysql:
 server:
   port: 44000
 
+decorator:
+  datasource:
+    p6spy:
+      logging: slf4j
+      enable-logging: off
+      
 springdoc:
   version: '1.0.0'
   api-docs:
@@ -65,14 +71,16 @@ ecos-api-key: A3KS6JOGXDYWDBC2XQ3Y
 file:
   upload-dir: C:\ftp
 
-
-
-#---
-#spring:
-#  config:
-#    activate:
-#      on-profile: local
-#
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+decorator:
+  datasource:
+    p6spy:
+      logging: slf4j
+      enable-logging: on
 #
 #---
 #spring:
@@ -83,3 +91,4 @@ file:
 #    hibernate:
 #      ddl-auto: update
 #
+

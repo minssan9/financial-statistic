@@ -57,6 +57,7 @@ public class EcosApiServiceImpl implements EcosApiService {
         return ecosDataRepo.saveAll(ecosData);
     }
 
+
     public List<EcosSchema> retrieveSchema() {
         KrBankRequest krBankRequest = new KrBankRequest();
         krBankRequest.setServiceName("StatisticTableList");
