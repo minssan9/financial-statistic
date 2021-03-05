@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -42,9 +41,6 @@ public class EcosApiServiceImpl implements EcosApiService {
     @Autowired
     CoreProperties coreProperties;
 
-    @SpringBootApplication
-    static class TestConfiguration {
-    }
     public List<EcosData> retrieveData(KrBankRequest krBankRequest) {
         krBankRequest.setServiceName("StatisticSearch");
         krBankRequest.setPeriod("DD");

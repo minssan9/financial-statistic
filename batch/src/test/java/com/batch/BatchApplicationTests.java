@@ -1,12 +1,11 @@
 package com.batch;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-@SpringBootTest
+@SpringBootApplication
+@EnableConfigurationProperties
 class BatchApplicationTests {
-
-    @Test
     void contextLoads() {
     }
 
