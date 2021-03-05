@@ -2,20 +2,22 @@ package com.service.controller;
 
 import com.core.api.EcosApiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("krbankapi")
+@RequestMapping("/ecosapi")
 class EcosApiController {
     @Autowired
     private EcosApiService ecosApiService;
 
-//    @GetMapping("kospi")
-//    private ResponseEntity getTemplates() {
-//        return ResponseEntity.ok().body(krBankApiService.getKOSPI("20200101", "20201129", 1L, 1000L));
-//    }
+    @GetMapping("/schema")
+    private ResponseEntity getTemplates() {
+        return ResponseEntity.ok().body(ecosApiService.retrieveSchema());
+    }
 
 //    @GetMapping("schema/update")
 //    @LogExecutionTime

@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class BatchApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(BatchApplication.class, args);
     }
 

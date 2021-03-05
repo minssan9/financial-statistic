@@ -1,6 +1,6 @@
 package com.core.domain;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,12 +19,12 @@ public class EcosSchema {
         @Id @GeneratedValue
         Long id;
 
-        @Field("pstatcode") @Expose @Column(name = "P_STAT_CODE") String pstatcode; // 상위 통계표 코드
-        @Field("statcode") @Expose @Column(name = "STAT_CODE") String statcode; // 000Y005             	통계표코드
-        @Field("statname") @Expose @Column(name = "STAT_NAME") String statname; // 1.통화 및 유동성지표
-        @Field("cycle") @Expose @Column(name = "CYCLE")  String cycle;    //        주기
-        @Field("orgname") @Expose @Column(name = "ORG_NAME") String orgname;         // 출처
-        @Field("searchFlag") @Expose @Column(name = "SRCH_YN") String searchFlag; // N
+        @Field("pstatcode") @SerializedName("P_STAT_CODE") @Column(name = "P_STAT_CODE") String pstatcode; // 상위 통계표 코드
+        @Field("statcode") @SerializedName("STAT_CODE") @Column(name = "STAT_CODE") String statcode; // 000Y005             	통계표코드
+        @Field("statname") @SerializedName("STAT_NAME") @Column(name = "STAT_NAME") String statname; // 1.통화 및 유동성지표
+        @Field("cycle") @SerializedName("CYCLE") @Column(name = "CYCLE")  String cycle;    //        주기
+        @Field("orgname") @SerializedName("ORG_NAME") @Column(name = "ORG_NAME") String orgname;         // 출처
+        @Field("searchFlag") @SerializedName("SRCH_YN") @Column(name = "SRCH_YN") String searchFlag; // N
 
 //        상위통계표코드	P_STAT_CODE	8	000Y074	상위통계표코드
 //        통계표코드	STAT_CODE	8	000Y702

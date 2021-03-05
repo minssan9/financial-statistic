@@ -1,17 +1,15 @@
 package com.core.properties;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@ConfigurationProperties(prefix = "db-mysql")
-@Configuration
-@Getter
-@Setter
+@ConfigurationProperties("mysql")
+@Data
+@Component
 public class MysqlProperties   {
-    private String url;
-    private String username;
-    private String password;
-    private String driverClassName;
+    String url;
+    String username;
+    String password;
+    String driverClassName;
 }

@@ -1,5 +1,3 @@
-application:
-  name: fn
 
 server:
   port: 44000

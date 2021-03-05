@@ -13,4 +13,5 @@ public class StaticConfig {
     public static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm");
 
+    public static String ECOS_API_KEY ;
 }
