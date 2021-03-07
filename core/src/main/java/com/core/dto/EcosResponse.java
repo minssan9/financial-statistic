@@ -1,13 +1,11 @@
 package com.core.dto;
 
-import com.core.domain.EcosSchema;
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class KrBankSchemaResponse {
+public class EcosResponse {
 
     @SerializedName("StatisticTableList")
     private StatisticTableList statisticTableList;
@@ -17,11 +15,13 @@ public class KrBankSchemaResponse {
         @SerializedName("list_total_count")
         int list_total_count;
         @SerializedName("row")
-        List<EcosSchema> row;
+        List<Object> row;
 
-        public List<EcosSchema> getKrBankSchema() {
-            return row;
-        }
+//        public List<EcosSchema> getKrBankSchema() {
+//            return row.stream().map(i-> {
+//                return new EcosSchema(i)
+//            }).collect(Collectors.toList());
+//        }
     }
 }
 

@@ -22,7 +22,7 @@ public class ScheduledJobConfig {
 //        ECOS_API_KEY = serviceProperties.getEcosApiKey();
         String nowDate = LocalDateTime.now().format(DATE_STRING_FORMAT);
 
-        ecosApiService.retrieveDataEachSchema(nowDate, nowDate);
+        ecosApiService.retrieveDataFromAllSchema(nowDate, nowDate);
     }
 
 }

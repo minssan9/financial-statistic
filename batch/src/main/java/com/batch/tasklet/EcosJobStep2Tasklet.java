@@ -31,7 +31,7 @@ public class EcosJobStep2Tasklet implements Tasklet {
         String endDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         log.info("sampleStep1 start : {}", startDate, endDate);
 
-        ecosApiService.retrieveDataEachSchema(startDate, endDate);
+        ecosApiService.retrieveDataFromAllSchema(startDate, endDate);
 
         // step2 logic
 

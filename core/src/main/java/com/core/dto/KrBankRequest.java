@@ -1,6 +1,6 @@
 package com.core.dto;
 
-import com.core.domain.EcosSchema;
+import com.core.domain.EcosSchemaDetail;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,24 +8,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class KrBankRequest {
-    String serviceName = "";
-    String url = "http://ecos.bok.or.kr/api";
+    private String serviceName = "";
+    private String url = "http://ecos.bok.or.kr/api";
+    private String authKey = "ECOS_API_KEY";
+    private String requestType = "json";
+    private String language = "kr";
+    private String queryStartDate = "";
+    private String queryEndDate = "";
+    private Long reqStartCount = 1L;
+    private Long reqEndCount = 1000L;
+    private String period = "";
+    private String statisticCode = "";
+    private String option1 = "";
+    private String option2 = "";
+    private String option3 = "";
 
-
-    String authKey = "ECOS_API_KEY";
-    String requestType = "json";
-    String language = "kr";
-    String period = "";
-
-    String statisticCode = "";
-    String option1 = "";
-    String option2 = "";
-    String option3 = "";
-    String queryStartDate = "";
-    String queryEndDate = "";
-    Long reqStartCount = 1L;
-    Long reqEndCount = 1000L;
-
+    private EcosSchemaDetail ecosSchemaDetail;
 
     public KrBankRequest(String statisticCode, String option1, String option2, String option3, String queryStartDate, String queryEndDate, String period, Long reqStartCount, Long reqEndCount) {
         this.statisticCode = statisticCode;
@@ -38,9 +36,9 @@ public class KrBankRequest {
         this.reqEndCount = reqEndCount;
     }
 
-    public KrBankRequest(EcosSchema ecosSchema) {
-        this.statisticCode = ecosSchema.getPstatcode();
-        this.option1 = ecosSchema.getStatcode();
+    public KrBankRequest(EcosSchemaDetail ecosSchemaDetail) {
+        this.statisticCode = ecosSchemaDetail.getStatcode();
+        this.option1 = ecosSchemaDetail.getStatcode();
         this.reqStartCount = 1L;
         this.reqEndCount = 1000L;
     }

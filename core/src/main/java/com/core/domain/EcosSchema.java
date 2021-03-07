@@ -26,6 +26,7 @@ public class EcosSchema {
         @Field("orgname") @SerializedName("ORG_NAME") @Column(name = "ORG_NAME") String orgname;         // 출처
         @Field("searchFlag") @SerializedName("SRCH_YN") @Column(name = "SRCH_YN") String searchFlag; // N
 
+
 //        상위통계표코드	P_STAT_CODE	8	000Y074	상위통계표코드
 //        통계표코드	STAT_CODE	8	000Y702
 //        통계명	STAT_NAME	200	1.2.2 본원통화 구성내역(평잔)	통계명

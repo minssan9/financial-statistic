@@ -4,6 +4,7 @@ import static com.core.config.StaticConfig.DATE_STRING_FORMAT;
 import static org.junit.Assert.assertNotNull;
 
 import com.core.domain.EcosSchema;
+import com.core.domain.EcosSchemaDetail;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -30,14 +31,32 @@ class EcosApiServiceImplTest {
     void retrieveSchema() {
     }
 
+
     @Test
-    void retrieveDataEachSchema() {
+    void getUrlString() {
+    }
+
+    @Test
+    void testRetrieveSchema() {
+    }
+
+    @Test
+    void retrieveSchemaDetail() {
         String nowDate = LocalDateTime.now().format(DATE_STRING_FORMAT);
-        List<EcosSchema> ecosSchemas =  ecosApiService.retrieveDataEachSchema(nowDate, nowDate);
+        EcosSchema ecosSchema = new EcosSchema();
+            ecosSchema.setStatcode("010Y002");
+        List<EcosSchemaDetail> ecosSchemas =  ecosApiService.retrieveSchemaDetail(ecosSchema);
         assertNotNull(ecosSchemas);
     }
 
     @Test
-    void getUrlString() {
+    void retrieveSchemaDetailByEachSchema() {
+        String nowDate = LocalDateTime.now().format(DATE_STRING_FORMAT);
+        List<EcosSchemaDetail> ecosSchemasDetails =  ecosApiService.retrieveDataFromAllSchema(nowDate, nowDate);
+        assertNotNull(ecosSchemasDetails);
+    }
+
+    @Test
+    void testRetrieveDataEachSchema() {
     }
 }

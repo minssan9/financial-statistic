@@ -8,6 +8,11 @@ spring:
       p6spy:
         logging: slf4j
         enable-logging: off
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://shop.voyagerss.com:3306/fn_statistic?characterEncoding=utf8&serverTimezone=UTC&useUnicode=true&createDatabaseIfNotExist=true
+    username: fn
+    password: dugodwk1
   jpa: #JPA 설정
     properties:
       hibernate:
@@ -19,6 +24,13 @@ spring:
     mongodb:
       host: mongodb://fn:dugodwk1@shop.voyagerss.com/fn?serverSelectionTimeoutMS=5000&connectTimeoutMS=10000
       database: fn
+    
+db-mysql:
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://shop.voyagerss.com:3306/fn_statistic?characterEncoding=utf8&serverTimezone=UTC&useUnicode=true&createDatabaseIfNotExist=true
+  username: fn
+  password: dugodwk1
+  
 springdoc:
   version: '1.0.0'
   api-docs:
@@ -46,9 +58,45 @@ kakao.admin.key: 9182554bcd6244da75828cfed4e62a65
 #app:
 ecos-api-key: A3KS6JOGXDYWDBC2XQ3Y
 
-
-db-mysql:
-  driver-class-name: com.mysql.cj.jdbc.Driver
-  url: jdbc:mysql://shop.voyagerss.com:3306/fn_statistic?characterEncoding=utf8&serverTimezone=UTC&useUnicode=true&createDatabaseIfNotExist=true
-  username: fn
-  password: dugodwk1
+devtools: #jsp파일 서버 재시작 없이 바로 적용하기  spring-boot-devtools
+  livereload:
+    enabled: true
+--- #local 환경
+spring:
+  profiles:
+    local
+  datasource:
+    url: jdbc:log4jdbc:mariadb://localhost:3306/test?characterEncoding=UTF-8&serverTimezone=UTC
+    hikari:
+      username: root
+      password: qlalfqjsgh
+logging: # ROOT레벨 전체 로깅 레벨 결정
+  level:
+    root: info
+    com.god.bo.test: info #com.god.bo.test 패키지 logging Level > info
+    com.god.bo.test.controller: debug #com.god.bo.test.controller 패키지 logging Level > debug
+--- #dev 환경
+spring:
+  profiles: dev
+  datasource: #TODO : dev용으로 변경 필요
+    url: jdbc:log4jdbc:mariadb://localhost:3306/test?characterEncoding=UTF-8&serverTimezone=UTC
+    hikari:
+      username: root
+      password: qlalfqjsgh
+  logging: # ROOT레벨 전체 로깅 레벨 결정
+    level:
+      root: info
+--- #prod 환경
+spring:
+  profiles: prod
+  datasource: #TODO : prod용으로 변경 필요
+    url: jdbc:log4jdbc:mariadb://localhost:3306/test?characterEncoding=UTF-8&serverTimezone=UTC
+    hikari:
+      username: root
+      password: qlalfqjsgh
+server:
+  port: 9090
+logging: # ROOT레벨 전체 로깅 레벨 결정
+  level:
+    root: error
+ 
