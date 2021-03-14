@@ -13,9 +13,12 @@
 ##      - test_application
 
 version: "3.7"   # 스키마 버전
+networks:
+  nginx_network:
+    driver: bridge
 services:
   fn-front:
-    image: fn-front
+    image: minssan9/fn-front
     restart: on-failure
     volumes: # container -> local로 mount할 수 있습니다.
       - ./etc/nginx:/docker/fn-front/etc/nginx
@@ -29,7 +32,7 @@ services:
       - nginx_network
       
   fn-back:
-    image: fn-back
+    image: minssan9/fn-back
     restart: always
 #    environment:
     #      MYSQL_INITDB_ROOT_USERNAME:
@@ -65,9 +68,7 @@ services:
 #    ports:
 #      - 3306:3306
 #
-networks:
-  nginx_network:
-    driver: bridge
+
 
 #  xcopy dist\*.* c:nginx\html\ /e /h /k
 # command ( -f dockerfile -t creating image name
