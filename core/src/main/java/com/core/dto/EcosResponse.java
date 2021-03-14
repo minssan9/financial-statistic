@@ -1,11 +1,16 @@
-package com.core.dto;
+package com.service.dto;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import lombok.Data;
 
 @Data
-public class EcosResponse {
+public class EcosResponse<T> {
 
     @SerializedName("StatisticTableList")
     private StatisticTableList statisticTableList;
@@ -14,14 +19,18 @@ public class EcosResponse {
     public class StatisticTableList {
         @SerializedName("list_total_count")
         int list_total_count;
+//        @SerializedName("row")
+//        List<T> row = new ArrayList<T>();
         @SerializedName("row")
-        List<Object> row;
+        List<Map<String, Object>> row = new ArrayList<>();
 
-//        public List<EcosSchema> getKrBankSchema() {
-//            return row.stream().map(i-> {
-//                return new EcosSchema(i)
-//            }).collect(Collectors.toList());
-//        }
+        public List<T> getRows(){
+            Gson gson = new Gson();
+            Type typeMyType = new TypeToken<ArrayList<T>>(){}.getType();
+            return gson.fromJson(gson.toJson(this.row.toString()), typeMyType);
+        };
     }
+
+
 }
 

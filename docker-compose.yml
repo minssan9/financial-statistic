@@ -12,62 +12,62 @@
 ##    depends_on:
 ##      - test_application
 
-version: "3.2"
+version: "3.7"   # 스키마 버전
 services:
-  nginx:
-    image: nginx    # nginx for vuejs
-    restart: always
-#    environment: # 환경변수를 정의합니다.
+  fn-front:
+    image: fn-front
+    restart: on-failure
     volumes: # container -> local로 mount할 수 있습니다.
-      - type: bind
-        source: ./nginx/conf.d
-        target: /etc/nginx/conf.d
-    container_name: "nginx"
+      - ./etc/nginx:/docker/fn-front/etc/nginx
+    container_name: fn-front
     ports:
       - 80:80
-#    depends_on:
-#      - test_application
-  mongodb:
-    image: mongo
+      - 443:443
+    expose:
+      - 80
+    networks:
+      - nginx_network
+      
+  fn-back:
+    image: fn-back
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: 123456
-    volumes:        # container -> local로 mount할 수 있습니다.
-      - type: bind
-        source: ./data/mongo
-        target: /data/mongo
-    container_name: "mongodb"
+#    environment:
+    #      MYSQL_INITDB_ROOT_USERNAME:
+    volumes: # container -> local로 mount할 수 있습니다.
+      - ./usr/share/fn-back/:/docker/fn-back/
+    container_name: fn-back # container의 name을 정의합니다.
     ports:
-      - "27017:27017"     # local:container
+      - 34000:34000
+    networks:
+      - nginx_network
 
-  mysql:
-    image: mysql
-    restart: always
-    environment:
-      MYSQL_INITDB_ROOT_USERNAME: root
-      MYSQL_INITDB_ROOT_PASSWORD: 123456
-    volumes:        # container -> local로 mount할 수 있습니다.
-      - type: bind
-        source: ./data/mysql
-        target: /data/mysql
-    container_name: "mysql"
-    ports:
-      - "3306:3306"
-  fn-service:
-    image: fn-service
-    restart: always
-    environment:
-      MYSQL_INITDB_ROOT_USERNAME:
-    volumes:        # container -> local로 mount할 수 있습니다.
-      - type: bind
-        source: ./logs
-        target: /logs
-    container_name: "fn-service" # container의 name을 정의합니다.
-    ports:
-      - "54000:54000"
-  vuejs:
-    image: docker/dockerfile
+#  mongodb:
+#    image: mongo
+#    restart: always
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: 123456
+#    volumes:        # container -> local로 mount할 수 있습니다.
+#      - ./data/mongo:/data/mongo
+#    container_name: "mongodb"
+#    ports:
+#      - 27017:27017     # local:container
+#
+#  mysql:
+#    image: mysql
+#    restart: always
+#    environment:
+#      MYSQL_INITDB_ROOT_USERNAME: root
+#      MYSQL_INITDB_ROOT_PASSWORD: 123456
+#    volumes:        # container -> local로 mount할 수 있습니다.
+#      - ./data/mysql:/data/mysql
+#    container_name: "mysql"
+#    ports:
+#      - 3306:3306
+#
+networks:
+  nginx_network:
+    driver: bridge
 
 #  xcopy dist\*.* c:nginx\html\ /e /h /k
 # command ( -f dockerfile -t creating image name
@@ -109,7 +109,4 @@ services:
 #  service-network:
 
 # on manager server
-docker stack deploy -c docker-compose.yml fn-service
 
-docker service ls
-docker service ps fn-service

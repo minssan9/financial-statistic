@@ -1,28 +1,23 @@
 package com.service;
 
-import com.core.api.EcosApiService;
-import com.service.properties.ServiceProperties;
+import com.core.apiservice.EcosApiService;
+import com.core.repo.EcosSchemaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Profile;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 
-@Profile("service")
 @SpringBootApplication
 @ComponentScan(basePackages = {  "com.core", "com.service"})
-@CrossOrigin(origins = {"*", "http://localhost"})
+//@CrossOrigin(origins = {"*", "http://localhost"})
 public class ServiceApplication implements ApplicationRunner {
 
-    @Autowired
-    ServiceProperties serviceProperties;
 
+    @Autowired
+    EcosSchemaRepo ecosSchemaRepo;
     @Autowired
     EcosApiService ecosApiService;
 
@@ -35,6 +30,8 @@ public class ServiceApplication implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 //        String nowDate = LocalDateTime.now().format(DATE_STRING_FORMAT);
 //        ecosApiService.retrieveDataEachSchema(nowDate, nowDate);
+//        List<EcosSchema> ecosSchemaList = ecosApiService.retrieveSchema();
+//        ecosSchemaRepo.saveAll(ecosSchemaList);
     }
 
 
