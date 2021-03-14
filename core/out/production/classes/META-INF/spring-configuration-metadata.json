@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "db-mysql",
+      "type": "com.core.config.properties.MysqlProperties",
+      "sourceType": "com.core.config.properties.MysqlProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "db-mysql.driver-class-name",
+      "type": "java.lang.String",
+      "sourceType": "com.core.config.properties.MysqlProperties"
+    },
+    {
+      "name": "db-mysql.password",
+      "type": "java.lang.String",
+      "sourceType": "com.core.config.properties.MysqlProperties"
+    },
+    {
+      "name": "db-mysql.url",
+      "type": "java.lang.String",
+      "sourceType": "com.core.config.properties.MysqlProperties"
+    },
+    {
+      "name": "db-mysql.username",
+      "type": "java.lang.String",
+      "sourceType": "com.core.config.properties.MysqlProperties"
+    }
+  ],
+  "hints": []
+}
