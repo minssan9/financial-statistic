@@ -1,13 +1,11 @@
 package com.core;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootTest
-class CoreApplicationTests {
 
-//    @Test
-    void contextLoads() {
+@SpringBootApplication
+public class CoreApplicationTests {
+    public void contextLoads(){
+
     }
-
 }

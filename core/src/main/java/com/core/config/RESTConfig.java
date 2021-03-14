@@ -1,5 +1,10 @@
 package com.core.config;
 
+import static com.core.config.properties.CoreProperties.ECOS_API_URL;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,13 +15,19 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
-public class RestConfiguration {
+public class RESTConfig {
+
+    @Bean
+    public WebClient webClient(WebClient.Builder builder) {
+        return builder
+            .baseUrl(ECOS_API_URL)
+            .defaultCookie("key", "value")
+            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+            .build();
+    }
 
     @Bean
     RestTemplate restTemplate()  {
