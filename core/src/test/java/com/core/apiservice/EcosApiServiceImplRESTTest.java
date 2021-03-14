@@ -3,11 +3,11 @@ package com.core.apiservice;
 import static com.core.config.properties.CoreProperties.DATE_STRING_FORMAT;
 import static org.junit.Assert.assertNotNull;
 
-import com.core.domain.EcosSchema;
 import com.core.domain.EcosSchemaDetail;
 import com.core.dto.EcosDto;
 import java.time.LocalDateTime;
 import java.util.List;
+import javafx.print.PrinterJob.JobStatus;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +43,8 @@ class EcosApiServiceImplRESTTest {
 
     @Test
     void retrieveSchemaDetail() {
-        String nowDate = LocalDateTime.now().format(DATE_STRING_FORMAT);
-        EcosSchema ecosSchema = new EcosSchema();
-            ecosSchema.setStatcode("010Y002");
-        List<EcosSchemaDetail> ecosSchemas =  ecosApiService.retrieveSchemaDetail(ecosSchema);
-        assertNotNull(ecosSchemas);
+        JobStatus jobStatus =  ecosApiService.retrieveSchemaDetail();
+        assertNotNull(jobStatus);
     }
 
     @Test

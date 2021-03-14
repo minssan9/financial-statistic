@@ -8,4 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EcosSchemaRepo extends JpaRepository<EcosSchema, Long> {
     List<EcosSchema> findBySearchFlag(String searchFlag);
+
+    List<EcosSchema> findByPstatcodeAndSearchFlag(String pstatcode, String searchFlag);
+
+    List<EcosSchema> findByCycleAndSearchFlag(String cycle, String y);
 }

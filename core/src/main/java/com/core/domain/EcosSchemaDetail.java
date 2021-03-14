@@ -3,11 +3,8 @@ package com.core.domain;
 import com.google.gson.annotations.SerializedName;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 @Entity
 @NoArgsConstructor
-@Table(name = "ecosschemadt")
+@Table(name = "ecosschemadetail")
 @Data
 public class EcosSchemaDetail {
         @Column(name = "id")
@@ -33,9 +30,9 @@ public class EcosSchemaDetail {
         @Field(name = "endtime") @Column(name = "END_TIME") @SerializedName("END_TIME")        private  String endtime;
         @Field(name = "datacnt") @Column(name = "DATA_CNT") @SerializedName("DATA_CNT")        private  int datacnt;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "STAT_CODE", insertable = false, updatable = false)
-        EcosSchema ecosSchema;
+//        @ManyToOne(fetch = FetchType.LAZY)
+//        @JoinColumn(name = "STAT_CODE", insertable = false, updatable = false)
+//        EcosSchema ecosSchema;
 
         //        상위통계표코드	P_STAT_CODE	8	000Y074	상위통계표코드
 //        통계표코드	STAT_CODE	8	000Y702

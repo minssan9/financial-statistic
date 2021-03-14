@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import com.core.config.properties.CoreProperties;
 import com.core.domain.EcosSchema;
 import java.util.List;
+import javafx.print.PrinterJob.JobStatus;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ class EcosApiServiceImplWebClientTest {
 
     @Test
     void retrieveSchemaDetail() {
+        JobStatus jobStatus = ecosApiServiceImplWebClient.retrieveSchemaDetail();
+        assertNotNull(jobStatus);
     }
 
     @Test
