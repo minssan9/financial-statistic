@@ -1,18 +1,16 @@
 package com.batch.job;
 
 
-import com.core.api.EcosApiService;
+import com.core.apiservice.EcosApiService;
+import com.core.dto.EcosDto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.scope.context.ChunkContext;
-import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -56,12 +54,15 @@ public class EcosJobConfig {
     public Step ecosDataStep() {
         return stepBuilderFactory.get("ecosDataStep")
             .tasklet((contribution, chunkContext) -> {
+
                 String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
                 String endDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
                 log.info("sampleStep1 start : {}", startDate, endDate);
 
-//                ecosApiService.retrieveDataEachSchema(startDate, endDate);
-
+                EcosDto ecosDto = new EcosDto();
+                ecosDto.setQueryStartDate(startDate);
+                ecosDto.setQueryEndDate(endDate);
+                ecosApiService.retrieveDataFromAllSchema(ecosDto);
 //                contribution.setExitStatus(ExitStatus.COMPLETED);
 
 //                if (false) {

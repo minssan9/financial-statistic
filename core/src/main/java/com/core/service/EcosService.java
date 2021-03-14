@@ -2,7 +2,7 @@ package com.core.service;
 
 import com.core.domain.EcosData;
 import com.core.domain.EcosSchema;
-import com.core.dto.KrBankRequest;
+import com.core.dto.EcosDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +11,6 @@ import java.util.List;
 @Service
 public
 interface EcosService {
-    List<EcosSchema> getSchema(KrBankRequest krBankRequest );
-    List<EcosData> getData(KrBankRequest krBankRequest );
+    List<EcosSchema> getSchema(EcosDto ecosDto);
+    List<EcosData> getData(EcosDto ecosDto );
 }

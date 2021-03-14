@@ -34,7 +34,7 @@ public class EcosSchemaDetail {
         @Field(name = "datacnt") @Column(name = "DATA_CNT") @SerializedName("DATA_CNT")        private  int datacnt;
 
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "STAT_CODE")
+        @JoinColumn(name = "STAT_CODE", insertable = false, updatable = false)
         EcosSchema ecosSchema;
 
         //        상위통계표코드	P_STAT_CODE	8	000Y074	상위통계표코드

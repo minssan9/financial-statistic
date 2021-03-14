@@ -1,8 +1,9 @@
 package com.service.config;
 
-import static com.core.config.StaticConfig.DATE_STRING_FORMAT;
+import static com.core.config.properties.CoreProperties.DATE_STRING_FORMAT;
 
-import com.core.api.EcosApiService;
+import com.core.apiservice.EcosApiService;
+import com.core.dto.EcosDto;
 import com.core.repo.EcosSchemaRepo;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,10 @@ public class ScheduledJobConfig {
     void retrieveEcosData() throws Exception{
 //        ECOS_API_KEY = serviceProperties.getEcosApiKey();
         String nowDate = LocalDateTime.now().format(DATE_STRING_FORMAT);
-
-        ecosApiService.retrieveDataFromAllSchema(nowDate, nowDate);
+        EcosDto ecosDto = new EcosDto();
+        ecosDto.setQueryEndDate(nowDate);
+        ecosDto.setQueryEndDate( nowDate);
+        ecosApiService.retrieveDataFromAllSchema(ecosDto);
     }
 
 }

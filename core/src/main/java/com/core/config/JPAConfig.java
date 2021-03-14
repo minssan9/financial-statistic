@@ -1,6 +1,6 @@
 package com.core.config;
 
-import com.core.properties.MysqlProperties;
+import com.core.config.properties.MysqlProperties;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.util.Objects;
@@ -19,7 +19,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.core.repo"})
+@EnableJpaRepositories(basePackages = {"com.core.repo"},
+    entityManagerFactoryRef = "mysqlEntityManagerFactory",
+    transactionManagerRef = "mysqlTransactionManager")
 @EntityScan(basePackages = "com.core.domain")
 public class JPAConfig {
     @Autowired
@@ -38,15 +40,15 @@ public class JPAConfig {
 
     @Bean(name = "mysqlDataSource")
     @Primary
-    public DataSource mysqlDataSource() {
+    public DataSource dataSource() {
         HikariConfig config = new HikariConfig(mysqlDBProperties());
         return new LazyConnectionDataSourceProxy(new HikariDataSource(config));
     }
     @Bean
     @Primary
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
+    public LocalContainerEntityManagerFactoryBean mysqlEntityManagerFactory(
         EntityManagerFactoryBuilder builder) {
-        return builder.dataSource(mysqlDataSource())
+        return builder.dataSource(dataSource())
             .packages("com.core.domain")
             .persistenceUnit("mysql")
             .build();
@@ -54,7 +56,7 @@ public class JPAConfig {
 
     @Bean
     @Primary
-    public PlatformTransactionManager transactionManager(EntityManagerFactoryBuilder builder) {
-        return new JpaTransactionManager(Objects.requireNonNull(entityManagerFactory(builder).getObject()));
+    public PlatformTransactionManager mysqlTransactionManager(EntityManagerFactoryBuilder builder) {
+        return new JpaTransactionManager(Objects.requireNonNull(mysqlEntityManagerFactory(builder).getObject()));
     }
 }

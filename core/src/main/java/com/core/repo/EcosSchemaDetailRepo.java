@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EcosSchemaDetailRepo extends JpaRepository<EcosSchemaDetail, Long> {
-    List<EcosSchemaDetail> findBySearchFlag(String searchFlag);
+    List<EcosSchemaDetail> findByStatcode(String statCode);
+    List<EcosSchemaDetail> findByPitemcode(String pItemCode);
 }

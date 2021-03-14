@@ -1,4 +1,4 @@
-//package com.core.aop;
+//package com.core.config.aop;
 //
 //import java.lang.annotation.ElementType;
 //import java.lang.annotation.Retention;

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @Tag(name = "ecos data source example", description = "This controller is for the test")
-@RestController("fn")
+@RestController("ecos")
 class EcosController {
     @Autowired
     private EcosService ecosService;
@@ -31,13 +31,13 @@ class EcosController {
     private EcosDataRepo ecosDataRepo;
 
 
-    @GetMapping("schema/list")
+    @GetMapping("schema")
     private ResponseEntity getSchema(Pageable pageable  ) {
 
-        Page<EcosSchema> krBankSchemas = ecosSchemaRepo.findAll(pageable);
+        Page<EcosSchema> ecosSchemas = ecosSchemaRepo.findAll(pageable);
         return ResponseEntity
                 .ok()
-            .body(krBankSchemas );
+            .body(ecosSchemas );
     }
 
     @Operation(summary = "Get Data by Date",

@@ -1,6 +1,7 @@
 package com.batch.tasklet;
 
-import com.core.api.EcosApiService;
+import com.core.apiservice.EcosApiService;
+import com.core.dto.EcosDto;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import lombok.extern.slf4j.Slf4j;
@@ -30,8 +31,11 @@ public class EcosJobStep2Tasklet implements Tasklet {
         String startDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String endDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         log.info("sampleStep1 start : {}", startDate, endDate);
+        EcosDto ecosDto = new EcosDto();
+        ecosDto.setQueryStartDate(startDate);
+        ecosDto.setQueryEndDate(endDate);
 
-        ecosApiService.retrieveDataFromAllSchema(startDate, endDate);
+        ecosApiService.retrieveDataFromAllSchema(ecosDto);
 
         // step2 logic
 

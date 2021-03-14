@@ -1,7 +1,7 @@
 package com.batch.job;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import com.core.api.EcosApiService;
+import com.core.apiservice.EcosApiService;
 import com.core.domain.EcosSchema;
 import java.util.List;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
 package com.service.controller;
 
-import com.core.api.EcosApiService;
+import com.core.apiservice.EcosApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
