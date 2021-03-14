@@ -110,3 +110,5 @@ networks:
 
 # on manager server
 
+docker service ls
+docker service ps fn-service

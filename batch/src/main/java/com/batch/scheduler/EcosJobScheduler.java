@@ -24,7 +24,7 @@ public class EcosJobScheduler {
             JobParameters jobParameters = new JobParametersBuilder()
                     .addString("str", "TEST")
                     .toJobParameters();
-            jobLauncher.run(ecosJobConfig.simpleJob(), jobParameters);
+            jobLauncher.run(ecosJobConfig.sampleJob(), jobParameters);
 
         } catch (Exception e) {
             log.error(e.getMessage());
