@@ -30,7 +30,7 @@ public class EcosDto {
 
 
     public EcosDto(String statisticCode, String option1, String option2, String option3, String queryStartDate, String queryEndDate, String period, Long reqStartCount, Long reqEndCount) {
-        this.url = "coreProperties.ECOS_API_URL";
+        this.url = "";
         this.statisticCode = statisticCode;
         this.option1 = option1;
         this.option2 = option2;
@@ -43,7 +43,7 @@ public class EcosDto {
     }
 
     public EcosDto(EcosSchemaDetail ecosSchemaDetail) {
-        this.url = "coreProperties.ECOS_API_URL";
+        this.url = "";
         this.statisticCode = ecosSchemaDetail.getStatcode();
         this.option1 = ecosSchemaDetail.getStatcode();
         this.reqStartCount = 1L;

@@ -20,11 +20,11 @@ public class ScheduledJobConfig {
 
     @Scheduled(cron = "0 0 24 * * *")
     void retrieveEcosData() throws Exception{
-//        ECOS_API_KEY = serviceProperties.getEcosApiKey();
         String nowDate = LocalDateTime.now().format(DATE_STRING_FORMAT);
         EcosDto ecosDto = new EcosDto();
         ecosDto.setQueryEndDate(nowDate);
         ecosDto.setQueryEndDate( nowDate);
+
         ecosApiService.retrieveDataFromAllSchema(ecosDto);
     }
 
