@@ -54,7 +54,7 @@ class EcosApiServiceImplRESTTest {
         ecosDto.setQueryStartDate(nowDate);
         ecosDto.setQueryEndDate(nowDate);
 
-        List<EcosSchemaDetail> ecosSchemasDetails =  ecosApiService.retrieveDataFromAllSchema( ecosDto);
+        List<EcosSchemaDetail> ecosSchemasDetails =  ecosApiService.retrieveData( ecosDto);
         assertNotNull(ecosSchemasDetails);
     }
 

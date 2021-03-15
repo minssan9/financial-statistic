@@ -25,7 +25,7 @@ public class ScheduledJob {
         ecosDto.setQueryEndDate(nowDate);
         ecosDto.setQueryEndDate( nowDate);
 
-        ecosApiService.retrieveDataFromAllSchema(ecosDto);
+        ecosApiService.retrieveData(ecosDto);
     }
 
 }
